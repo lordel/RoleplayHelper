@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+          styleClass="root" stylesheets="/com/roleplay/CSS/generalStyle.css" xmlns="http://javafx.com/javafx/8.0.60"
+          xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.roleplay.valueSettingGUI.ValueSettingGUIController">
+    <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints/>
+        <RowConstraints/>
+        <RowConstraints/>
+        <RowConstraints/>
+        <RowConstraints/>
+        <RowConstraints/>
+        <RowConstraints/>
+        <RowConstraints/>
+        <RowConstraints/>
+        <RowConstraints/>
+        <RowConstraints/>
+        <RowConstraints/>
+        <RowConstraints/>
+        <RowConstraints/>
+        <RowConstraints/>
+        <RowConstraints/>
+    </rowConstraints>
+    <Label text="Please complete the following information:" GridPane.rowIndex="1">
+        <GridPane.margin>
+            <Insets bottom="10.0"/>
+        </GridPane.margin>
+    </Label>
+    <Label text="Name:" GridPane.rowIndex="4">
+        <GridPane.margin>
+            <Insets left="5.0"/>
+        </GridPane.margin>
+    </Label>
+    <Label text="Intelligence:" GridPane.columnIndex="1" GridPane.rowIndex="4">
+        <GridPane.margin>
+            <Insets left="5.0"/>
+        </GridPane.margin>
+    </Label>
+    <TextField fx:id="nameInput" GridPane.rowIndex="6">
+        <GridPane.margin>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+        </GridPane.margin>
+    </TextField>
+    <TextField fx:id="intelInput" GridPane.columnIndex="1" GridPane.rowIndex="6">
+        <GridPane.margin>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+        </GridPane.margin>
+    </TextField>
+    <Label text="Strength:" GridPane.rowIndex="7">
+        <GridPane.margin>
+            <Insets left="5.0"/>
+        </GridPane.margin>
+    </Label>
+    <Label text="Wisdom:" GridPane.columnIndex="1" GridPane.rowIndex="7">
+        <GridPane.margin>
+            <Insets left="5.0"/>
+        </GridPane.margin>
+    </Label>
+    <TextField fx:id="strInput" GridPane.rowIndex="8">
+        <GridPane.margin>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+        </GridPane.margin>
+    </TextField>
+    <TextField fx:id="wisInput" GridPane.columnIndex="1" GridPane.rowIndex="8">
+        <GridPane.margin>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+        </GridPane.margin>
+    </TextField>
+    <Label text="Dexterity:" GridPane.rowIndex="9">
+        <GridPane.margin>
+            <Insets left="5.0"/>
+        </GridPane.margin>
+    </Label>
+    <Label text="Charisma:" GridPane.columnIndex="1" GridPane.rowIndex="9">
+        <GridPane.margin>
+            <Insets left="5.0"/>
+        </GridPane.margin>
+    </Label>
+    <TextField fx:id="dexInput" GridPane.rowIndex="10">
+        <GridPane.margin>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+        </GridPane.margin>
+    </TextField>
+    <TextField fx:id="chaInput" GridPane.columnIndex="1" GridPane.rowIndex="10">
+        <GridPane.margin>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+        </GridPane.margin>
+    </TextField>
+    <Label text="Constitution:" GridPane.rowIndex="11">
+        <GridPane.margin>
+            <Insets left="5.0"/>
+        </GridPane.margin>
+    </Label>
+    <Label text="Maximum Health" GridPane.columnIndex="1" GridPane.rowIndex="11">
+        <GridPane.margin>
+            <Insets left="5.0"/>
+        </GridPane.margin>
+    </Label>
+    <TextField fx:id="conInput" GridPane.rowIndex="12">
+        <GridPane.margin>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+        </GridPane.margin>
+    </TextField>
+    <TextField fx:id="maxHealthInput" GridPane.columnIndex="1" GridPane.rowIndex="12">
+        <GridPane.margin>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+        </GridPane.margin>
+    </TextField>
+    <Button mnemonicParsing="false" onAction="#readXMLPressed" text="Read From Saved File" GridPane.halignment="CENTER"
+            GridPane.rowIndex="15"/>
+    <Button mnemonicParsing="false" onAction="#continuePressed" text="Confirm And Continue" GridPane.columnIndex="1"
+            GridPane.halignment="CENTER" GridPane.rowIndex="15"/>
+    <Label fx:id="errorLabel" textFill="RED" GridPane.columnIndex="1" GridPane.rowIndex="14"/>
+    <padding>
+        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+    </padding>
+</GridPane>

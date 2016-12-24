@@ -1,0 +1,19 @@
+.root{
+    -fx-background-color: green;
+}
+
+.button{
+    -fx-background-insets: 0, 0, 1, 2;
+}
+
+.radio-button .radio{
+    -fx-background-insets: 0, 0, 1, 2;
+}
+
+.progress-bar .track{
+    -fx-background-insets: 0, 0, 1, 1, 2, 1;
+}
+
+.combo-box{
+    -fx-background-insets: 0, 0, 1, 2;
+}

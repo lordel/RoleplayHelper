@@ -1,0 +1,5 @@
+/*Stylesheet applied to all GUIs in the project*/
+
+.button{
+    -fx-pref-width: 200;
+}
