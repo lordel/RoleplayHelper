@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-//TODO: add proper enums. one for stylesheets
+//TODO: add proper enums. one for FXML sheets
 public class Main extends Application {
     //TODO: make javadoc properly for all classes and functions
 
