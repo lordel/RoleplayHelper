@@ -159,7 +159,19 @@ public class Character{
     }
 
     //Setters-----------------------------------------------------------------------------------------------------------
+
+    /**
+     * Sets all the stats for this Character.
+     * @param str The strength of this Character.
+     * @param dex The dexterity of this Character.
+     * @param con The constitution of this Character.
+     * @param intel The intelligence of this Character.
+     * @param wis The wisdom of this Character.
+     * @param cha The charisma of this Character.
+     * @param hpMax The maximum health of this Character.
+     */
     private void setValues(int str, int dex, int con, int intel, int wis, int cha, int hpMax){
+        //Sets all the stats for the character.
         this.str = str;
         this.dex = dex;
         this.con = con;
@@ -168,9 +180,14 @@ public class Character{
         this.cha = cha;
         this.hpMax = hpMax;
         hpCurr = hpMax; //current hp
+
+        //Call setBonus() to set all the bonus values.
         setBonus();
     }
 
+    /**
+     * Sets all the bonuses for this Character.
+     */
     private void setBonus(){
         //bonuses can be negative
         strbn=(str-10)/2;
