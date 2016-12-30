@@ -138,7 +138,7 @@ public class CharacterGUIController extends GUIController implements Initializab
     }
 
     /**
-     * Sets the text fields and progress bars based on the current values held by the character attribute of this class.
+     * Sets the text labels and progress bars based on the current values held by the character attribute of this class.
      */
     private void setValues() {
         name.setText(character.getName());
@@ -166,7 +166,7 @@ public class CharacterGUIController extends GUIController implements Initializab
      * Action listener method for the D4 button press.
      * This method is executed when the D4 button is pressed. It randomly rolls the die using the Die class, gets the
      * bonus from the current Character, and adds it to the result of the roll to get the total. It then sets the values
-     * of the roll, bonus, and total text fields to match the results.
+     * of the roll, bonus, and total text labels to match the results.
      * @see com.roleplay.utils.Die
      */
     @FXML
@@ -182,7 +182,7 @@ public class CharacterGUIController extends GUIController implements Initializab
      * Action listener method for the D6 button press.
      * This method is executed when the D6 button is pressed. It randomly rolls the die using the Die class, gets the
      * bonus from the current Character, and adds it to the result of the roll to get the total. It then sets the values
-     * of the roll, bonus, and total text fields to match the results.
+     * of the roll, bonus, and total text labels to match the results.
      * @see com.roleplay.utils.Die
      */
     @FXML
@@ -198,7 +198,7 @@ public class CharacterGUIController extends GUIController implements Initializab
      * Action listener method for the D8 button press.
      * This method is executed when the D8 button is pressed. It randomly rolls the die using the Die class, gets the
      * bonus from the current Character, and adds it to the result of the roll to get the total. It then sets the values
-     * of the roll, bonus, and total text fields to match the results.
+     * of the roll, bonus, and total text labels to match the results.
      * @see com.roleplay.utils.Die
      */
     @FXML
@@ -214,7 +214,7 @@ public class CharacterGUIController extends GUIController implements Initializab
      * Action listener method for the D10 button press.
      * This method is executed when the D10 button is pressed. It randomly rolls the die using the Die class, gets the
      * bonus from the current Character, and adds it to the result of the roll to get the total. It then sets the values
-     * of the roll, bonus, and total text fields to match the results.
+     * of the roll, bonus, and total text labels to match the results.
      * @see com.roleplay.utils.Die
      */
     @FXML
@@ -230,7 +230,7 @@ public class CharacterGUIController extends GUIController implements Initializab
      * Action listener method for the D12 button press.
      * This method is executed when the D12 button is pressed. It randomly rolls the die using the Die class, gets the
      * bonus from the current Character, and adds it to the result of the roll to get the total. It then sets the values
-     * of the roll, bonus, and total text fields to match the results.
+     * of the roll, bonus, and total text labels to match the results.
      * @see com.roleplay.utils.Die
      */
     @FXML
@@ -246,7 +246,7 @@ public class CharacterGUIController extends GUIController implements Initializab
      * Action listener method for the D20 button press.
      * This method is executed when the D20 button is pressed. It randomly rolls the die using the Die class, gets the
      * bonus from the current Character, and adds it to the result of the roll to get the total. It then sets the values
-     * of the roll, bonus, and total text fields to match the results.
+     * of the roll, bonus, and total text labels to match the results.
      * @see com.roleplay.utils.Die
      */
     @FXML
@@ -262,7 +262,7 @@ public class CharacterGUIController extends GUIController implements Initializab
      * Action listener method for the Percent Die button press.
      * This method is executed when the Percent Die button is pressed. It randomly rolls the die using the Die class,
      * gets the bonus from the current Character, and adds it to the result of the roll to get the total. It then sets
-     * the values of the roll, bonus, and total text fields to match the results.
+     * the values of the roll, bonus, and total text labels to match the results.
      * @see com.roleplay.utils.Die
      */
     @FXML

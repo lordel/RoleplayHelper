@@ -61,7 +61,8 @@ public class Main extends Application {
                 loadScene("restoreHealthGUI/RestoreHealthGUI.fxml");
                 break;
             case 4:
-                loadScene("damageGUI/DamageGUI.fxml");
+                loadScene("DamageGUI/DamageGUI.fxml");
+                break;
             case 5:
                 loadScene("saveXMLGUI/SaveXMLGUI.fxml");
                 break;
