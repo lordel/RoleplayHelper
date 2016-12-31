@@ -1,11 +1,10 @@
 package com.roleplay.characterGUI;
 
 import com.roleplay.Character;
-import com.roleplay.utils.GUIController;
 import com.roleplay.enums.CharacterTraits;
 import com.roleplay.utils.BarValueAndColor;
 import com.roleplay.utils.Die;
-
+import com.roleplay.utils.GUIController;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -15,10 +14,15 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Controller in charge of the CharacterGUI actions.
+ * This class is linked to the CharacterGUI.fxml file. It provides methods for actions performed by the user on the GUI.
+ * This class extends GUIController and implements the Initializable interface.
+ *
+ * @see com.roleplay.utils.GUIController
+ * @see javafx.fxml.Initializable
+ */
 public class CharacterGUIController extends GUIController implements Initializable {
-    /**
-     * //TODO:add information about attributes
-     */
     private ToggleGroup radioGroup; //group to combine all radio buttons
 
     //Character attribute fields----------------------------------------------------------------------------------------
@@ -87,6 +91,15 @@ public class CharacterGUIController extends GUIController implements Initializab
     private ComboBox<Object> comboBox; //combo box of objects to allow for Separator objects
 
     //Override methods--------------------------------------------------------------------------------------------------
+
+    /**
+     * Default initialize() method for Initializable interface.
+     * This method generates a toggle group and links all the radio buttons to it so that only one can be selected at a
+     * time. It initializes the ComboBox with the required items and sets the initial values of die roll, bonus and
+     * total to 0.
+     *
+     * @see javafx.fxml.Initializable
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //Create a group for the radio buttons and add all of them to it------------------------------------------------
@@ -113,12 +126,23 @@ public class CharacterGUIController extends GUIController implements Initializab
     }
 
     //Setters-----------------------------------------------------------------------------------------------------------
+
+    /**
+     * Sets this class' Character attribute and sets all the GUI values based on that Character.
+     * This method calls to the superclass setCharacter() method to set the Character attribute and then sets the text
+     * fields of the GUI to the correct values based on the information provided by "character".
+     *
+     * @param character Input Character to be used to set the values of the GUI elements.
+     */
     @Override
     public void setCharacter(Character character) {
         super.setCharacter(character);
         setValues();
     }
 
+    /**
+     * Sets the text labels and progress bars based on the current values held by the character attribute of this class.
+     */
     private void setValues() {
         name.setText(character.getName());
         str.setText(Integer.toString(character.getStr()));
@@ -134,11 +158,21 @@ public class CharacterGUIController extends GUIController implements Initializab
         cha.setText(Integer.toString(character.getCha()));
         chaBonus.setText(Integer.toString(character.getBonus(CharacterTraits.CHA)));
 
+        //Use the BarValueAndColor util to set both color and value of the progress bars
         BarValueAndColor.setBarValue(hpBar, character.getHpCurr(), character.getHpMax());
         BarValueAndColor.setBarValue(mpBar, character.getHpCurr(), character.getHpMax());
     }
 
     //Action Listeners--------------------------------------------------------------------------------------------------
+
+    /**
+     * Action listener method for the D4 button press.
+     * This method is executed when the D4 button is pressed. It randomly rolls the die using the Die class, gets the
+     * bonus from the current Character, and adds it to the result of the roll to get the total. It then sets the values
+     * of the roll, bonus, and total text labels to match the results.
+     *
+     * @see com.roleplay.utils.Die
+     */
     @FXML
     private void d4Pressed() {
         int bonusValue = character.getBonus(checkButtons());
@@ -148,6 +182,14 @@ public class CharacterGUIController extends GUIController implements Initializab
         total.setText(Integer.toString(rollValue + bonusValue));
     }
 
+    /**
+     * Action listener method for the D6 button press.
+     * This method is executed when the D6 button is pressed. It randomly rolls the die using the Die class, gets the
+     * bonus from the current Character, and adds it to the result of the roll to get the total. It then sets the values
+     * of the roll, bonus, and total text labels to match the results.
+     *
+     * @see com.roleplay.utils.Die
+     */
     @FXML
     private void d6Pressed() {
         int bonusValue = character.getBonus(checkButtons());
@@ -157,6 +199,14 @@ public class CharacterGUIController extends GUIController implements Initializab
         total.setText(Integer.toString(rollValue + bonusValue));
     }
 
+    /**
+     * Action listener method for the D8 button press.
+     * This method is executed when the D8 button is pressed. It randomly rolls the die using the Die class, gets the
+     * bonus from the current Character, and adds it to the result of the roll to get the total. It then sets the values
+     * of the roll, bonus, and total text labels to match the results.
+     *
+     * @see com.roleplay.utils.Die
+     */
     @FXML
     private void d8Pressed() {
         int bonusValue = character.getBonus(checkButtons());
@@ -166,6 +216,14 @@ public class CharacterGUIController extends GUIController implements Initializab
         total.setText(Integer.toString(rollValue + bonusValue));
     }
 
+    /**
+     * Action listener method for the D10 button press.
+     * This method is executed when the D10 button is pressed. It randomly rolls the die using the Die class, gets the
+     * bonus from the current Character, and adds it to the result of the roll to get the total. It then sets the values
+     * of the roll, bonus, and total text labels to match the results.
+     *
+     * @see com.roleplay.utils.Die
+     */
     @FXML
     private void d10Pressed() {
         int bonusValue = character.getBonus(checkButtons());
@@ -175,6 +233,13 @@ public class CharacterGUIController extends GUIController implements Initializab
         total.setText(Integer.toString(rollValue + bonusValue));
     }
 
+    /**
+     * Action listener method for the D12 button press.
+     * This method is executed when the D12 button is pressed. It randomly rolls the die using the Die class, gets the
+     * bonus from the current Character, and adds it to the result of the roll to get the total. It then sets the values
+     * of the roll, bonus, and total text labels to match the results.
+     * @see com.roleplay.utils.Die
+     */
     @FXML
     private void d12Pressed() {
         int bonusValue = character.getBonus(checkButtons());
@@ -184,6 +249,14 @@ public class CharacterGUIController extends GUIController implements Initializab
         total.setText(Integer.toString(rollValue + bonusValue));
     }
 
+    /**
+     * Action listener method for the D20 button press.
+     * This method is executed when the D20 button is pressed. It randomly rolls the die using the Die class, gets the
+     * bonus from the current Character, and adds it to the result of the roll to get the total. It then sets the values
+     * of the roll, bonus, and total text labels to match the results.
+     *
+     * @see com.roleplay.utils.Die
+     */
     @FXML
     private void d20Pressed() {
         int bonusValue = character.getBonus(checkButtons());
@@ -193,6 +266,14 @@ public class CharacterGUIController extends GUIController implements Initializab
         total.setText(Integer.toString(rollValue + bonusValue));
     }
 
+    /**
+     * Action listener method for the Percent Die button press.
+     * This method is executed when the Percent Die button is pressed. It randomly rolls the die using the Die class,
+     * gets the bonus from the current Character, and adds it to the result of the roll to get the total. It then sets
+     * the values of the roll, bonus, and total text labels to match the results.
+     *
+     * @see com.roleplay.utils.Die
+     */
     @FXML
     private void percentPressed() {
         int bonusValue = character.getBonus(checkButtons());
@@ -203,18 +284,18 @@ public class CharacterGUIController extends GUIController implements Initializab
     }
 
     /**
-     * TODO:add info
-     * @throws IOException
+     * Action listener method for the selection of an item from the ComboBox.
+     * This method executes when an item is selected from the ComboBox list. It checks for a null value of the selected
+     * item, which would result from the user selecting Separator items. If the value is not null the method performs
+     * the necessary action based on the value selected by the user. It then proceeds to reset the selection of the
+     * ComboBox.
+     *
+     * @throws IOException Possibly thrown by Main's chooseScene() method when it is called.
+     * @see com.roleplay.Main
      */
     @FXML
     private void optionSelected() throws IOException {
-        //We check to make sure if the value is not null. This ensures that we only take action when user selects items
-        if (comboBox.getValue() != null) {
-            //reset the selection of the user selects the separator
-            /*if (comboBox.getSelectionModel().getSelectedIndex() == 5){
-                Platform.runLater(() -> comboBox.getSelectionModel().clearSelection());
-                return;
-            }*/
+        try {
             switch ((String) comboBox.getValue()) {
                 case "Restore Health":
                     mainClass.chooseScene(3);
@@ -229,19 +310,26 @@ public class CharacterGUIController extends GUIController implements Initializab
                     Platform.runLater(() -> comboBox.getSelectionModel().clearSelection());
                     break;
                 case "Save Character Info":
-                    //mainClass.chooseScene(5);
+                    //mainClass.chooseScene(5); TODO: Finish implementing save XML GUI
                     character.saveToXML();
                     Platform.runLater(() -> comboBox.getSelectionModel().clearSelection());
                     break;
             }
+        } catch (NullPointerException | ClassCastException e) {
+            //Do nothing and reset the selection as this means the separator was the selected value
+            Platform.runLater(() -> comboBox.getSelectionModel().clearSelection());
         }
     }
 
     //Utilities---------------------------------------------------------------------------------------------------------
 
     /**
-     * TODO: add info
-     * @return
+     * Returns CharacterTrait based on which radioButton is selected.
+     * This method checks all radioButtons in the radioGroup to see which is selected. Based on which is selcted it
+     * returns the corresponding CharacterTrait.
+     *
+     * @return Returns a CharacterTraits value.
+     * @see com.roleplay.enums.CharacterTraits
      */
     private CharacterTraits checkButtons() {
         if (radioGroup.getSelectedToggle().equals(strRadio)) {

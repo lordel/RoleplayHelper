@@ -2,8 +2,6 @@ package com.roleplay.valueSettingGUI;
 
 import com.roleplay.Character;
 import com.roleplay.utils.GUIController;
-
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -11,8 +9,16 @@ import javafx.scene.control.TextField;
 import java.io.IOException;
 
 /**
- * File created by Lorenzo Delcroix on 12/19/2016 9:09.
- * Belongs to the package com.roleplay.valueSettingGUI of the RoleplayHelper project.
+ * Controller in charge of the ValueSettingGUI actions.
+ * This class is linked to the ValueSettingGUI.fxml file. It provides methods for actions performed by the user on
+ * the GUI. The user is provided with the current values of the the statistics of his Character, which can be changed
+ * by inputting new values in the textFields. Checks for invalid input are in place and error messages are displayed
+ * in case of such situations. When the continue button is pressed any changes to the values are transferred to the
+ * current Character. This class also allows for reading of the values from an XML file if one is present.
+ * TODO: add error messages if XML cannot be read or is not present.
+ * This class extends GUIController and implements the Initializable interface.
+ * @see com.roleplay.utils.GUIController
+ * @see javafx.fxml.Initializable
  */
 public class ValueSettingGUIController extends GUIController{
     @FXML
@@ -34,8 +40,16 @@ public class ValueSettingGUIController extends GUIController{
     @FXML
     private Label errorLabel;
 
+    //Action listeners--------------------------------------------------------------------------------------------------
+
+    /**
+     * Action listener for continue Button press.
+     * This method will parse each field and check for valid input. If the input is invalid an error message is
+     * displayed. If all the values are valid the Character in Main is replaced with one with the values obtained from
+     * the TextFields in this class. The scene is the switched to the CharacterGUI.
+     */
     @FXML
-    private void continuePressed(ActionEvent actionEvent) {
+    private void continuePressed() {
         //reset the color and error message to the default
         nameInput.setStyle("-fx-border-color: none;");
         strInput.setStyle("-fx-border-color: none;");
@@ -151,8 +165,13 @@ public class ValueSettingGUIController extends GUIController{
         }
     }
 
+    /**
+     * Action listener for Read from file Button press.
+     * This method reads the Character information stored in a XML file and sets the values of the TextLabels to reflect
+     * the newly read values from the XML file.
+     */
     @FXML
-    private void readXMLPressed(ActionEvent actionEvent) {
+    private void readXMLPressed() {
         Character character = new Character();
         character.readFromXML();
         nameInput.setText(character.getName());
@@ -165,12 +184,18 @@ public class ValueSettingGUIController extends GUIController{
         maxHealthInput.setText(Integer.toString(character.getHpMax()));
     }
 
+    //To be removed
     @Override
     public void setCharacter(Character character) {
         super.setCharacter(character);
         setValues();
     }
 
+    //Utility-----------------------------------------------------------------------------------------------------------
+
+    /**
+     * Sets all the TextLabel values to the corresponding values taken from the current Character.
+     */
     private void setValues() {
         if (character == null) return;
         nameInput.setText(character.getName());
