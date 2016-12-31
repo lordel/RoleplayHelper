@@ -198,6 +198,10 @@ public class Character{
         chabn=(cha-10)/2;
     }
 
+    /**
+     * Sets the current health of this Character
+     * @param hpCurr the new value of the current health
+     */
     public void setHpCurr(int hpCurr) {
         this.hpCurr = hpCurr;
     }

@@ -22,7 +22,7 @@ import java.util.ResourceBundle;
  * Belongs to the package com.roleplay.restoreHealthGUI of the RoleplayHelper project.
  */
 
-public class RestoreHealthGUI extends GUIController implements Initializable {
+public class RestoreHealthGUIController extends GUIController implements Initializable {
     @FXML
     private Label progressLabel;
     @FXML

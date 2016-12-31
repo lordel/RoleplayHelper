@@ -1,7 +1,6 @@
 package com.roleplay.saveXMLGUI;
 
 import com.roleplay.utils.GUIController;
-
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -16,7 +15,7 @@ import java.util.ResourceBundle;
  * Belongs to the package com.roleplay.restoreHealthGUI of the RoleplayHelper project.
  */
 
-public class SaveXMLGUI extends GUIController implements Initializable {
+public class SaveXMLGUIController extends GUIController implements Initializable {
     @FXML
     private ProgressBar progressBar;
 
