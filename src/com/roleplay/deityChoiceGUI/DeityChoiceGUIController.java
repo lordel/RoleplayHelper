@@ -7,8 +7,8 @@ import javafx.fxml.FXML;
 import java.io.IOException;
 
 /**
- * Controller in charge of the DeityChoiceGUIController actions.
- * This class is linked to the DeityChoiceGUIController.fxml file. It provides methods for actions performed by the user on the
+ * Controller in charge of the DeityChoiceGUI actions.
+ * This class is linked to the DeityChoiceGUI.fxml file. It provides methods for actions performed by the user on the
  * GUI. The user is asked to select a deity preference out of the available choices.
  * This class extends GUIController and implements the Initializable interface.
  * @see com.roleplay.utils.GUIController

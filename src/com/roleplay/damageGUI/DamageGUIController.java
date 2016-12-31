@@ -17,8 +17,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- * Controller in charge of the DamageGUIController actions.
- * This class is linked to the DamageGUIController.fxml file. It provides methods for actions performed by the user on the GUI.
+ * Controller in charge of the DamageGUI actions.
+ * This class is linked to the DamageGUI.fxml file. It provides methods for actions performed by the user on the GUI.
  * The user is asked to input a value for the damage taken by his Character. A custom message and image is displayed
  * based on the amount of damage received.
  * This class extends GUIController and implements the Initializable interface.
@@ -104,10 +104,11 @@ public class DamageGUIController extends GUIController implements Initializable{
         }
     }
 
+    //Utility-----------------------------------------------------------------------------------------------------------
     /**
      * Class used to add a short wait.
-     * This class is used to create a short delay before the DamageGUIController is switched back to the previous scene. This
-     * class extends Task and is used to show the progress of the waiting period on a progress bar.
+     * This class is used to create a short delay before the DamageGUIController is switched back to the previous scene.
+     * This class extends Task and is used to show the progress of the waiting period on a progress bar.
      * @see javafx.concurrent.Task
      */
     private class WaitingClass extends Task<Void> {
