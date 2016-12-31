@@ -3,7 +3,6 @@ package com.roleplay.restoreHealthGUI;
 import com.roleplay.Character;
 import com.roleplay.utils.GUIController;
 import javafx.concurrent.Task;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -62,7 +61,7 @@ public class RestoreHealthGUIController extends GUIController implements Initial
      * before the scene transitions back to the previous one.
      */
     @FXML
-    private void confirmPressed(ActionEvent actionEvent) throws IOException {
+    private void confirmPressed() throws IOException {
         //Reset the labels to the original value in case they were modified because of an error
         textFieldLabel.setText("Health restored:");
         textField.setStyle("-fx-border-color: none;");
