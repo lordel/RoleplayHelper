@@ -18,6 +18,7 @@ import java.util.ResourceBundle;
  * Controller in charge of the CharacterGUI actions.
  * This class is linked to the CharacterGUI.fxml file. It provides methods for actions performed by the user on the GUI.
  * This class extends GUIController and implements the Initializable interface.
+ *
  * @see com.roleplay.utils.GUIController
  * @see javafx.fxml.Initializable
  */
@@ -96,6 +97,7 @@ public class CharacterGUIController extends GUIController implements Initializab
      * This method generates a toggle group and links all the radio buttons to it so that only one can be selected at a
      * time. It initializes the ComboBox with the required items and sets the initial values of die roll, bonus and
      * total to 0.
+     *
      * @see javafx.fxml.Initializable
      */
     @Override
@@ -129,6 +131,7 @@ public class CharacterGUIController extends GUIController implements Initializab
      * Sets this class' Character attribute and sets all the GUI values based on that Character.
      * This method calls to the superclass setCharacter() method to set the Character attribute and then sets the text
      * fields of the GUI to the correct values based on the information provided by "character".
+     *
      * @param character Input Character to be used to set the values of the GUI elements.
      */
     @Override
@@ -167,6 +170,7 @@ public class CharacterGUIController extends GUIController implements Initializab
      * This method is executed when the D4 button is pressed. It randomly rolls the die using the Die class, gets the
      * bonus from the current Character, and adds it to the result of the roll to get the total. It then sets the values
      * of the roll, bonus, and total text labels to match the results.
+     *
      * @see com.roleplay.utils.Die
      */
     @FXML
@@ -183,6 +187,7 @@ public class CharacterGUIController extends GUIController implements Initializab
      * This method is executed when the D6 button is pressed. It randomly rolls the die using the Die class, gets the
      * bonus from the current Character, and adds it to the result of the roll to get the total. It then sets the values
      * of the roll, bonus, and total text labels to match the results.
+     *
      * @see com.roleplay.utils.Die
      */
     @FXML
@@ -199,6 +204,7 @@ public class CharacterGUIController extends GUIController implements Initializab
      * This method is executed when the D8 button is pressed. It randomly rolls the die using the Die class, gets the
      * bonus from the current Character, and adds it to the result of the roll to get the total. It then sets the values
      * of the roll, bonus, and total text labels to match the results.
+     *
      * @see com.roleplay.utils.Die
      */
     @FXML
@@ -215,6 +221,7 @@ public class CharacterGUIController extends GUIController implements Initializab
      * This method is executed when the D10 button is pressed. It randomly rolls the die using the Die class, gets the
      * bonus from the current Character, and adds it to the result of the roll to get the total. It then sets the values
      * of the roll, bonus, and total text labels to match the results.
+     *
      * @see com.roleplay.utils.Die
      */
     @FXML
@@ -247,6 +254,7 @@ public class CharacterGUIController extends GUIController implements Initializab
      * This method is executed when the D20 button is pressed. It randomly rolls the die using the Die class, gets the
      * bonus from the current Character, and adds it to the result of the roll to get the total. It then sets the values
      * of the roll, bonus, and total text labels to match the results.
+     *
      * @see com.roleplay.utils.Die
      */
     @FXML
@@ -263,6 +271,7 @@ public class CharacterGUIController extends GUIController implements Initializab
      * This method is executed when the Percent Die button is pressed. It randomly rolls the die using the Die class,
      * gets the bonus from the current Character, and adds it to the result of the roll to get the total. It then sets
      * the values of the roll, bonus, and total text labels to match the results.
+     *
      * @see com.roleplay.utils.Die
      */
     @FXML
@@ -280,12 +289,13 @@ public class CharacterGUIController extends GUIController implements Initializab
      * item, which would result from the user selecting Separator items. If the value is not null the method performs
      * the necessary action based on the value selected by the user. It then proceeds to reset the selection of the
      * ComboBox.
+     *
      * @throws IOException Possibly thrown by Main's chooseScene() method when it is called.
      * @see com.roleplay.Main
      */
     @FXML
     private void optionSelected() throws IOException {
-        if (comboBox.getValue() != null) {
+        try {
             switch ((String) comboBox.getValue()) {
                 case "Restore Health":
                     mainClass.chooseScene(3);
@@ -305,6 +315,9 @@ public class CharacterGUIController extends GUIController implements Initializab
                     Platform.runLater(() -> comboBox.getSelectionModel().clearSelection());
                     break;
             }
+        } catch (NullPointerException | ClassCastException e) {
+            //Do nothing and reset the selection as this means the separator was the selected value
+            Platform.runLater(() -> comboBox.getSelectionModel().clearSelection());
         }
     }
 
@@ -314,6 +327,7 @@ public class CharacterGUIController extends GUIController implements Initializab
      * Returns CharacterTrait based on which radioButton is selected.
      * This method checks all radioButtons in the radioGroup to see which is selected. Based on which is selcted it
      * returns the corresponding CharacterTrait.
+     *
      * @return Returns a CharacterTraits value.
      * @see com.roleplay.enums.CharacterTraits
      */

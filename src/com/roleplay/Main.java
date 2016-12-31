@@ -36,7 +36,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         mainStage = primaryStage;
 
-        loadScene("deityChoiceGUI/DeityChoiceGUIController.fxml");
+        loadScene("deityChoiceGUI/DeityChoiceGUI.fxml");
 
         mainStage.setTitle("Roleplay Helper");
         mainStage.show();
@@ -58,13 +58,13 @@ public class Main extends Application {
                 loadScene("valueSettingGUI/ValueSettingGUI.fxml");
                 break;
             case 3:
-                loadScene("restoreHealthGUI/RestoreHealthGUIController.fxml");
+                loadScene("restoreHealthGUI/RestoreHealthGUI.fxml");
                 break;
             case 4:
-                loadScene("DamageGUIController/DamageGUIController.fxml");
+                loadScene("DamageGUI/DamageGUI.fxml");
                 break;
             case 5:
-                loadScene("saveXMLGUI/SaveXMLGUIController.fxml");
+                loadScene("saveXMLGUI/SaveXMLGUI.fxml");
                 break;
         }
     }
