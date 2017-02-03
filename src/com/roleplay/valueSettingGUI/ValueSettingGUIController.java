@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
+import javax.xml.bind.JAXBException;
 import java.io.IOException;
 
 /**
@@ -172,16 +173,21 @@ public class ValueSettingGUIController extends GUIController{
      */
     @FXML
     private void readXMLPressed() {
-        Character character = new Character();
-        character.readFromXML();
-        nameInput.setText(character.getName());
-        strInput.setText(Integer.toString(character.getStr()));
-        dexInput.setText(Integer.toString(character.getDex()));
-        conInput.setText(Integer.toString(character.getCon()));
-        intelInput.setText(Integer.toString(character.getIntel()));
-        wisInput.setText(Integer.toString(character.getWis()));
-        chaInput.setText(Integer.toString(character.getCha()));
-        maxHealthInput.setText(Integer.toString(character.getHpMax()));
+        try {
+            Character tempCharacter = new Character();
+            character.readFromXML();
+            nameInput.setText(tempCharacter.getName());
+            strInput.setText(Integer.toString(tempCharacter.getStr()));
+            dexInput.setText(Integer.toString(tempCharacter.getDex()));
+            conInput.setText(Integer.toString(tempCharacter.getCon()));
+            intelInput.setText(Integer.toString(tempCharacter.getIntel()));
+            wisInput.setText(Integer.toString(tempCharacter.getWis()));
+            chaInput.setText(Integer.toString(tempCharacter.getCha()));
+            maxHealthInput.setText(Integer.toString(tempCharacter.getHpMax()));
+        } catch (JAXBException e){
+            //TODO: properly handle error message
+            System.out.println("Error reading info from file!! " + e.getMessage() + " Please try again.");
+        }
     }
 
     //To be removed
