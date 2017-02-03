@@ -211,18 +211,12 @@ public class Character{
     /**
      * Saves this Character's info to XML file.
      */
-    public void saveToXML() {
-        //TODO: add throws exception
-        try {
+    public void saveToXML() throws JAXBException{
             JAXBContext jc = JAXBContext.newInstance(Character.class);
             Marshaller marshaller = jc.createMarshaller();
             marshaller.marshal(this, new File(filepath));
 
             System.out.println("Data was saved to file: " + filepath);
-        } catch (JAXBException e) {
-            System.out.println("There was a problem saving to the file: " + e.getMessage() + ". please try again.");
-            e.printStackTrace();
-        }
     }
 
     /**

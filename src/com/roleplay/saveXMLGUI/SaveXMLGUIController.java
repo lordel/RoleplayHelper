@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ProgressBar;
 
+import javax.xml.bind.JAXBException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -32,10 +33,16 @@ public class SaveXMLGUIController extends GUIController implements Initializable
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //TODO: add save to XML
-        WaitingClass wait = new WaitingClass();
-        progressBar.progressProperty().bind(wait.progressProperty());
-        new Thread(wait).start();
+        try {
+            character.saveToXML();
+            WaitingClass wait = new WaitingClass();
+            progressBar.progressProperty().bind(wait.progressProperty());
+            new Thread(wait).start();
+        } catch (JAXBException e) {
+            //TODO: Finish implementing error message!
+            System.out.println("There was a problem saving to the file: " + e.getMessage() + ". please try again.");
+            e.printStackTrace();
+        }
     }
 
     //Utility-----------------------------------------------------------------------------------------------------------
