@@ -4,6 +4,7 @@ import com.roleplay.utils.GUIController;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ProgressBar;
 
 import javax.xml.bind.JAXBException;
@@ -39,9 +40,19 @@ public class SaveXMLGUIController extends GUIController implements Initializable
             progressBar.progressProperty().bind(wait.progressProperty());
             new Thread(wait).start();
         } catch (JAXBException e) {
-            //TODO: Finish implementing error message!
-            System.out.println("There was a problem saving to the file: " + e.getMessage() + ". please try again.");
-            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Saving Data");
+            alert.setHeaderText("XML Saving Error");
+            alert.setContentText("Ooops, there was an error saving the information! Please try again.");
+            alert.showAndWait();
+
+            try {
+                mainClass.chooseScene(1);
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+
+            System.out.println("Error: " + e.getMessage());
         }
     }
 
