@@ -210,27 +210,21 @@ public class Character{
 
     /**
      * Saves this Character's info to XML file.
+     * @throws JAXBException thrown in case the writing to XML fails.
      */
-    public void saveToXML() {
-        //TODO: add throws exception
-        try {
+    public void saveToXML() throws JAXBException{
             JAXBContext jc = JAXBContext.newInstance(Character.class);
             Marshaller marshaller = jc.createMarshaller();
             marshaller.marshal(this, new File(filepath));
 
             System.out.println("Data was saved to file: " + filepath);
-        } catch (JAXBException e) {
-            System.out.println("There was a problem saving to the file: " + e.getMessage() + ". please try again.");
-            e.printStackTrace();
-        }
     }
 
     /**
      * Reads values from a XML file into this Class' attributes.
+     * @throws JAXBException thrown in case the reading from XML fails.
      */
-    public void readFromXML() {
-        //TODO: add throws exception
-        try {
+    public void readFromXML() throws JAXBException{
             JAXBContext jc = JAXBContext.newInstance(Character.class);
             Unmarshaller unmarshaller = jc.createUnmarshaller();
             Character readCharacter = (Character) unmarshaller.unmarshal(new File(filepath));
@@ -244,8 +238,5 @@ public class Character{
             cha = readCharacter.cha;
             hpMax = readCharacter.hpMax;
             hpCurr = readCharacter.hpCurr;
-        } catch (JAXBException e) {
-            System.out.println("Error reading info from file!! " + e.getMessage() + " Please try again.");
-        }
     }
 }
