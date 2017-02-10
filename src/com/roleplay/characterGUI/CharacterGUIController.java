@@ -310,8 +310,7 @@ public class CharacterGUIController extends GUIController implements Initializab
                     Platform.runLater(() -> comboBox.getSelectionModel().clearSelection());
                     break;
                 case "Save Character Info":
-                    //mainClass.chooseScene(5); TODO: Finish implementing save XML GUI
-                    character.saveToXML();
+                    mainClass.chooseScene(5);
                     Platform.runLater(() -> comboBox.getSelectionModel().clearSelection());
                     break;
             }
