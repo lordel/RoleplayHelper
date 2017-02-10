@@ -50,6 +50,7 @@ public class Main extends Application {
      * @throws IOException thrown if the method is not able to load the required FXML for the selected scene.
      */
     public void chooseScene(int choice) throws IOException {
+        //TODO: add enum for this
         switch (choice) {
             case 1:
                 loadScene("characterGUI/CharacterGUI.fxml");
