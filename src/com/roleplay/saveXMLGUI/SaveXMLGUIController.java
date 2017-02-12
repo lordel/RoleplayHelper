@@ -3,14 +3,10 @@ package com.roleplay.saveXMLGUI;
 import com.roleplay.utils.GUIController;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ProgressBar;
 
-import javax.xml.bind.JAXBException;
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 
 /**
  * Controller in charge of the SaveXMLGUI actions.
@@ -22,7 +18,7 @@ import java.util.ResourceBundle;
  * @see javafx.fxml.Initializable
  * @see com.roleplay.Character
  */
-public class SaveXMLGUIController extends GUIController implements Initializable {
+public class SaveXMLGUIController extends GUIController {
     @FXML
     private ProgressBar progressBar;
 
@@ -30,30 +26,14 @@ public class SaveXMLGUIController extends GUIController implements Initializable
 
     /**
      * Override method which executes at initialization.
-     * This method saves the current Character information to a XML file and starts the progress bar Task.
+     * This method launches a wait task which will save the character information to XML.
      */
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        try {
-            character.saveToXML();
-            WaitingClass wait = new WaitingClass();
-            progressBar.progressProperty().bind(wait.progressProperty());
-            new Thread(wait).start();
-        } catch (JAXBException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error Saving Data");
-            alert.setHeaderText("XML Saving Error");
-            alert.setContentText("Ooops, there was an error saving the information! Please try again.");
-            alert.showAndWait();
-
-            try {
-                mainClass.chooseScene(1);
-            } catch (IOException e1) {
-                e1.printStackTrace();
-            }
-
-            System.out.println("Error: " + e.getMessage());
-        }
+    @FXML
+    private void initialize() {
+        //Initialize a WaitingClass, it will save character data to XML
+        WaitingClass wait = new WaitingClass();
+        progressBar.progressProperty().bind(wait.progressProperty()); //Bind progress bar to wait progress
+        new Thread(wait).start();
     }
 
     //Utility-----------------------------------------------------------------------------------------------------------
@@ -67,10 +47,12 @@ public class SaveXMLGUIController extends GUIController implements Initializable
         /**
          * Override method which executes when the WaitingClass task is started.
          * This method increases the workDone by one at each iteration of a for loop and sets the Thread to sleep for a
-         * few milliseconds.
+         * few milliseconds. It also saves the current Character information to XML.
+         * @see com.roleplay.Character
          */
         @Override
         protected Void call() throws Exception {
+            mainClass.getCharacter().saveToXML(); //save Character information
             for (int i = 0; i < 50; i++) {
                 //increase work one by one
                 updateProgress(i +1, 50);
@@ -87,6 +69,26 @@ public class SaveXMLGUIController extends GUIController implements Initializable
         @Override
         protected void succeeded() {
             super.succeeded();
+            try {
+                mainClass.chooseScene(1);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        /**
+         * Override method which executes in case of failure in the Thread.
+         * This method will return an error message to the user and revert scene.
+         */
+        @Override
+        protected void failed() {
+            super.failed();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Saving Data");
+            alert.setHeaderText("XML Saving Error");
+            alert.setContentText("Ooops, there was an error saving the information! Please try again.");
+            alert.showAndWait();
+
             try {
                 mainClass.chooseScene(1);
             } catch (IOException e) {
