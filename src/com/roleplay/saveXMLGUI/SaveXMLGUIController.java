@@ -81,7 +81,7 @@ public class SaveXMLGUIController extends GUIController {
          * This method will return an error message to the user and revert scene.
          */
         @Override
-        protected void failed() {
+        protected void failed() { //TODO: look into the proper functioning of failed()
             super.failed();
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Saving Data");
