@@ -1,6 +1,5 @@
 package com.roleplay.utils;
 
-import com.roleplay.Character;
 import com.roleplay.Main;
 
 /**
@@ -8,15 +7,9 @@ import com.roleplay.Main;
  * This class is used to ensure all Controllers in the project have a common structure which can be used to access Main
  * and its methods from within the controller. It also enables Main to refer to the general class GUIController when
  * initializing all Controller classes.
- * TODO: remove character and rework all dependent classes with get/set methods from Main
  */
 public abstract class GUIController {
-    protected Character character;
     protected Main mainClass;
-
-    public void setCharacter(Character character){
-        this.character = character;
-    }
 
     /**
      * Sets the main class for this GUIController.
