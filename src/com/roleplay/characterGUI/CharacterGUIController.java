@@ -24,10 +24,10 @@ import java.util.ResourceBundle;
  */
 public class CharacterGUIController extends GUIController implements Initializable {
     private ToggleGroup radioGroup; //group to combine all radio buttons
-
     //Character attribute fields----------------------------------------------------------------------------------------
     @FXML
     private Label name;
+
     @FXML
     private Label str;
     @FXML
@@ -40,6 +40,12 @@ public class CharacterGUIController extends GUIController implements Initializab
     private Label wis;
     @FXML
     private Label cha;
+    @FXML //TODO:implement the values below:
+    private Label expValue;
+    @FXML
+    private Label mpValue;
+    @FXML
+    private Label hpValue;
 
     //Character bonus fields--------------------------------------------------------------------------------------------
     @FXML
@@ -84,14 +90,14 @@ public class CharacterGUIController extends GUIController implements Initializab
     private ProgressBar mpBar;
     @FXML
     private ProgressBar hpBar;
+    @FXML
+    private ProgressBar expBar;
 
-    //TODO: add experience bar
-
+    //Options-----------------------------------------------------------------------------------------------------------
     @FXML
     private ComboBox<Object> comboBox; //combo box of objects to allow for Separator objects
 
     //Override methods--------------------------------------------------------------------------------------------------
-
     /**
      * Default initialize() method for Initializable interface.
      * This method generates a toggle group and links all the radio buttons to it so that only one can be selected at a

@@ -21,7 +21,6 @@ public class SaveXMLGUIController extends GUIController {
     private ProgressBar progressBar;
 
     //Override methods--------------------------------------------------------------------------------------------------
-
     /**
      * Override method which executes at initialization.
      * This method launches a wait task which will save the character information to XML.
