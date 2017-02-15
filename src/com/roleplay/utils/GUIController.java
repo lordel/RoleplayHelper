@@ -12,12 +12,13 @@ public abstract class GUIController {
     protected Main mainClass;
 
     /**
-     * Sets the main class for this GUIController.
-     * This method is used to store the mainClass as a protected field which can late be used by this class to access
-     * Main's methods.
+     * Initializes and sets the main class for this GUIController.
+     * This method is used to store the mainClass as a protected field which can later be used by this class to access
+     * Main's methods. This method can also be used to initialize any values of the Controller.
+     *
      * @param mainClass The Main class instance to be stored.
      */
-    public void setMainClass(Main mainClass) {
+    public void initialize(Main mainClass) {
         this.mainClass = mainClass;
     }
 }

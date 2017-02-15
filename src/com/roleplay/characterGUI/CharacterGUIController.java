@@ -1,6 +1,7 @@
 package com.roleplay.characterGUI;
 
 import com.roleplay.Character;
+import com.roleplay.Main;
 import com.roleplay.enums.CharacterTraits;
 import com.roleplay.enums.ProgressBarType;
 import com.roleplay.utils.BarValueAndColor;
@@ -103,8 +104,9 @@ public class CharacterGUIController extends GUIController {
      * time. It initializes the ComboBox with the required items and sets the initial values of die roll, bonus and
      * total to 0. It also initializes the labels to the correct values based on the current Character.
      */
-    @FXML
-    public void initialize() {
+    @Override
+    public void initialize(Main mainClass) {
+        super.initialize(mainClass);
         //Create a group for the radio buttons and add all of them to it------------------------------------------------
         radioGroup = new ToggleGroup();
         noneRadio.setToggleGroup(radioGroup);
