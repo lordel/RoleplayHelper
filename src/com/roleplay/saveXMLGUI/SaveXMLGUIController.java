@@ -1,10 +1,13 @@
 package com.roleplay.saveXMLGUI;
 
+import com.roleplay.Main;
 import com.roleplay.utils.GUIController;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ProgressBar;
+
+import javax.xml.bind.JAXBException;
 
 /**
  * Controller in charge of the SaveXMLGUI actions.
@@ -21,12 +24,28 @@ public class SaveXMLGUIController extends GUIController {
     private ProgressBar progressBar;
 
     //Override methods--------------------------------------------------------------------------------------------------
+
     /**
      * Override method which executes at initialization.
-     * This method launches a wait task which will save the character information to XML.
+     * This method will save the Character information and launch a wait task which will update the progress bar
+     * before switching the scene back to the original one.
      */
-    @FXML
-    private void initialize() {
+    @Override
+    public void initialize(Main mainClass) {
+        super.initialize(mainClass);
+
+        try {
+            mainClass.getCharacter().saveToXML(); //save Character information
+        } catch (JAXBException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Saving Data");
+            alert.setHeaderText("XML Saving Error");
+            alert.setContentText("Ooops, there was an error saving the information! Please try again.");
+            alert.showAndWait();
+
+            mainClass.chooseScene(1);
+        }
+
         //Initialize a WaitingClass, it will save character data to XML
         WaitingClass wait = new WaitingClass();
         progressBar.progressProperty().bind(wait.progressProperty()); //Bind progress bar to wait progress
@@ -34,6 +53,7 @@ public class SaveXMLGUIController extends GUIController {
     }
 
     //Utility-----------------------------------------------------------------------------------------------------------
+
     /**
      * Class used to save character info and add a short wait.
      * This class is used to save the current character information and then create a short delay before the scene is
@@ -52,8 +72,6 @@ public class SaveXMLGUIController extends GUIController {
          */
         @Override
         protected Void call() throws Exception {
-            mainClass.getCharacter().saveToXML(); //save Character information
-
             for (int i = 0; i < 50; i++) {
                 //increase work one by one
                 updateProgress(i + 1, 50);
@@ -71,22 +89,6 @@ public class SaveXMLGUIController extends GUIController {
         @Override
         protected void succeeded() {
             super.succeeded();
-            mainClass.chooseScene(1);
-        }
-
-        /**
-         * Override method which executes in case of failure in the Thread.
-         * This method will return an error message to the user and revert scene.
-         */
-        @Override
-        protected void failed() {
-            super.failed();
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error Saving Data");
-            alert.setHeaderText("XML Saving Error");
-            alert.setContentText("Ooops, there was an error saving the information! Please try again.");
-            alert.showAndWait();
-
             mainClass.chooseScene(1);
         }
     }
