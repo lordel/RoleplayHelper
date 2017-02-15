@@ -2,17 +2,16 @@ package com.roleplay.characterGUI;
 
 import com.roleplay.Character;
 import com.roleplay.enums.CharacterTraits;
+import com.roleplay.enums.ProgressBarType;
 import com.roleplay.utils.BarValueAndColor;
 import com.roleplay.utils.Die;
 import com.roleplay.utils.GUIController;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
+
 
 /**
  * Controller in charge of the CharacterGUI actions.
@@ -22,7 +21,7 @@ import java.util.ResourceBundle;
  * @see com.roleplay.utils.GUIController
  * @see javafx.fxml.Initializable
  */
-public class CharacterGUIController extends GUIController implements Initializable {
+public class CharacterGUIController extends GUIController {
     private ToggleGroup radioGroup; //group to combine all radio buttons
     //Character attribute fields----------------------------------------------------------------------------------------
     @FXML
@@ -40,7 +39,7 @@ public class CharacterGUIController extends GUIController implements Initializab
     private Label wis;
     @FXML
     private Label cha;
-    @FXML //TODO:implement the values below:
+    @FXML
     private Label expValue;
     @FXML
     private Label mpValue;
@@ -99,15 +98,13 @@ public class CharacterGUIController extends GUIController implements Initializab
 
     //Override methods--------------------------------------------------------------------------------------------------
     /**
-     * Default initialize() method for Initializable interface.
+     * Default initialize() method.
      * This method generates a toggle group and links all the radio buttons to it so that only one can be selected at a
      * time. It initializes the ComboBox with the required items and sets the initial values of die roll, bonus and
-     * total to 0.
-     *
-     * @see javafx.fxml.Initializable
+     * total to 0. It also initializes the labels to the correct values based on the current Character.
      */
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    @FXML
+    public void initialize() {
         //Create a group for the radio buttons and add all of them to it------------------------------------------------
         radioGroup = new ToggleGroup();
         noneRadio.setToggleGroup(radioGroup);
@@ -119,37 +116,18 @@ public class CharacterGUIController extends GUIController implements Initializab
         chaRadio.setToggleGroup(radioGroup);
         noneRadio.setSelected(true);
 
-        //TODO: need to add labels with the value of health and mp!
-
         //set ComboBox items--------------------------------------------------------------------------------------------
         comboBox.getItems().addAll("Edit Values", "Restore Health", "Take Damage", "Use Magic", new Separator(),
-                "Save Character Info"); //TODO: add implementation for magic points
+                "Save Character Info"); //TODO: add implementation for magic points and exp
+        //TODO: need to look into other options other than combobox
 
         //Set initial  roll, bonus, and total to 0----------------------------------------------------------------------
         roll.setText("0");
         bonus.setText("0");
         total.setText("0");
-    }
 
-    //Setters-----------------------------------------------------------------------------------------------------------
-
-    /**
-     * Sets this class' Character attribute and sets all the GUI values based on that Character.
-     * This method calls to the superclass setCharacter() method to set the Character attribute and then sets the text
-     * fields of the GUI to the correct values based on the information provided by "character".
-     *
-     * @param character Input Character to be used to set the values of the GUI elements.
-     */
-    @Override
-    public void setCharacter(Character character) {
-        super.setCharacter(character);
-        setValues();
-    }
-
-    /**
-     * Sets the text labels and progress bars based on the current values held by the character attribute of this class.
-     */
-    private void setValues() {
+        //Set all the labels--------------------------------------------------------------------------------------------
+        Character character = mainClass.getCharacter();
         name.setText(character.getName());
         str.setText(Integer.toString(character.getStr()));
         strBonus.setText(Integer.toString(character.getBonus(CharacterTraits.STR)));
@@ -163,10 +141,14 @@ public class CharacterGUIController extends GUIController implements Initializab
         wisBonus.setText(Integer.toString(character.getBonus(CharacterTraits.WIS)));
         cha.setText(Integer.toString(character.getCha()));
         chaBonus.setText(Integer.toString(character.getBonus(CharacterTraits.CHA)));
+        hpValue.setText(Integer.toString(character.getHpCurr()));
+        mpValue.setText(Integer.toString(character.getMpCurr()));
+        expValue.setText(Integer.toString(character.getExpCurr()));
 
         //Use the BarValueAndColor util to set both color and value of the progress bars
-        BarValueAndColor.setBarValue(hpBar, character.getHpCurr(), character.getHpMax());
-        BarValueAndColor.setBarValue(mpBar, character.getHpCurr(), character.getHpMax());
+        BarValueAndColor.setBarValue(hpBar, character.getHpCurr(), character.getHpMax(), ProgressBarType.HP);
+        BarValueAndColor.setBarValue(mpBar, character.getMpCurr(), character.getMpMax(), ProgressBarType.MP);
+        BarValueAndColor.setBarValue(expBar, character.getExpCurr(), character.getExpMax(), ProgressBarType.EXP);
     }
 
     //Action Listeners--------------------------------------------------------------------------------------------------
@@ -181,7 +163,7 @@ public class CharacterGUIController extends GUIController implements Initializab
      */
     @FXML
     private void d4Pressed() {
-        int bonusValue = character.getBonus(checkButtons());
+        int bonusValue = mainClass.getCharacter().getBonus(checkButtons());
         int rollValue = Die.roll(4);
         roll.setText(Integer.toString(rollValue));
         bonus.setText(Integer.toString(bonusValue));
@@ -198,7 +180,7 @@ public class CharacterGUIController extends GUIController implements Initializab
      */
     @FXML
     private void d6Pressed() {
-        int bonusValue = character.getBonus(checkButtons());
+        int bonusValue = mainClass.getCharacter().getBonus(checkButtons());
         int rollValue = Die.roll(6);
         roll.setText(Integer.toString(rollValue));
         bonus.setText(Integer.toString(bonusValue));
@@ -215,7 +197,7 @@ public class CharacterGUIController extends GUIController implements Initializab
      */
     @FXML
     private void d8Pressed() {
-        int bonusValue = character.getBonus(checkButtons());
+        int bonusValue = mainClass.getCharacter().getBonus(checkButtons());
         int rollValue = Die.roll(8);
         roll.setText(Integer.toString(rollValue));
         bonus.setText(Integer.toString(bonusValue));
@@ -232,7 +214,7 @@ public class CharacterGUIController extends GUIController implements Initializab
      */
     @FXML
     private void d10Pressed() {
-        int bonusValue = character.getBonus(checkButtons());
+        int bonusValue = mainClass.getCharacter().getBonus(checkButtons());
         int rollValue = Die.roll(10);
         roll.setText(Integer.toString(rollValue));
         bonus.setText(Integer.toString(bonusValue));
@@ -248,7 +230,7 @@ public class CharacterGUIController extends GUIController implements Initializab
      */
     @FXML
     private void d12Pressed() {
-        int bonusValue = character.getBonus(checkButtons());
+        int bonusValue = mainClass.getCharacter().getBonus(checkButtons());
         int rollValue = Die.roll(12);
         roll.setText(Integer.toString(rollValue));
         bonus.setText(Integer.toString(bonusValue));
@@ -265,7 +247,7 @@ public class CharacterGUIController extends GUIController implements Initializab
      */
     @FXML
     private void d20Pressed() {
-        int bonusValue = character.getBonus(checkButtons());
+        int bonusValue = mainClass.getCharacter().getBonus(checkButtons());
         int rollValue = Die.roll(20);
         roll.setText(Integer.toString(rollValue));
         bonus.setText(Integer.toString(bonusValue));
@@ -282,7 +264,7 @@ public class CharacterGUIController extends GUIController implements Initializab
      */
     @FXML
     private void percentPressed() {
-        int bonusValue = character.getBonus(checkButtons());
+        int bonusValue = mainClass.getCharacter().getBonus(checkButtons());
         int rollValue = Die.roll(100);
         roll.setText(Integer.toString(rollValue));
         bonus.setText(Integer.toString(bonusValue));

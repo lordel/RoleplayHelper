@@ -6,5 +6,6 @@
  * TODO: Add CSS descriptions in each CSS file
  * TODO: Add info about waiting class here in this file
  * TODO: Switch all inisialize() to the new JAVAFX convention!!!
+ * TODO: check all classes' documentation for up to date information
  */
 package com.roleplay;
