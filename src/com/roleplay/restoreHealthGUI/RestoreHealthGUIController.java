@@ -1,10 +1,10 @@
 package com.roleplay.restoreHealthGUI;
 
 import com.roleplay.Character;
+import com.roleplay.Main;
 import com.roleplay.utils.GUIController;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
@@ -12,20 +12,17 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
-
 /**
  * Controller in charge of the RestoreHealthGUI actions.
  * This class is linked to the RestoreHealthGUI.fxml file. It provides methods for actions performed by the user on
  * the GUI. The user is asked to input a value for the health restored for his Character. A custom message and image
  * is displayed based on the amount of health restored.
  * This class extends GUIController and implements the Initializable interface.
+ *
  * @see com.roleplay.utils.GUIController
  * @see javafx.fxml.Initializable
  */
-public class RestoreHealthGUIController extends GUIController implements Initializable {
+public class RestoreHealthGUIController extends GUIController {
     @FXML
     private Label progressLabel;
     @FXML
@@ -45,12 +42,14 @@ public class RestoreHealthGUIController extends GUIController implements Initial
 
     //Override methods--------------------------------------------------------------------------------------------------
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void initialize(Main mainClass) {
+        super.initialize(mainClass);
         infoLabel.setText("How much health did you restore?"); //TODO: remove this and move to FXML file
         textFieldLabel.setText("Health restored:");
     }
 
     //Action listeners--------------------------------------------------------------------------------------------------
+
     /**
      * Action listener for the confirm button press.
      * This method executes when the confirm button is pressed. It gets the input restored health from the textField and
@@ -61,7 +60,7 @@ public class RestoreHealthGUIController extends GUIController implements Initial
      * before the scene transitions back to the previous one.
      */
     @FXML
-    private void confirmPressed() throws IOException {
+    private void confirmPressed() {
         //Reset the labels to the original value in case they were modified because of an error
         textFieldLabel.setText("Health restored:");
         textField.setStyle("-fx-border-color: none;");
@@ -107,6 +106,7 @@ public class RestoreHealthGUIController extends GUIController implements Initial
      * Class used to add a short wait.
      * This class is used to create a short delay before the DamageGUIController is switched back to the previous scene. This
      * class extends Task and is used to show the progress of the waiting period on a progress bar.
+     *
      * @see javafx.concurrent.Task
      */
     private class WaitingClass extends Task<Void> {
@@ -134,11 +134,7 @@ public class RestoreHealthGUIController extends GUIController implements Initial
         @Override
         protected void succeeded() {
             super.succeeded();
-            try {
-                mainClass.chooseScene(1);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            mainClass.chooseScene(1);
         }
     }
 }
