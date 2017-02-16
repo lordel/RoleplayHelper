@@ -1,10 +1,10 @@
 package com.roleplay.damageGUI;
 
 import com.roleplay.Character;
+import com.roleplay.Main;
 import com.roleplay.utils.GUIController;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
@@ -12,20 +12,17 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
-
 /**
  * Controller in charge of the DamageGUI actions.
  * This class is linked to the DamageGUI.fxml file. It provides methods for actions performed by the user on the GUI.
  * The user is asked to input a value for the damage taken by his Character. A custom message and image is displayed
  * based on the amount of damage received.
  * This class extends GUIController and implements the Initializable interface.
+ *
  * @see com.roleplay.utils.GUIController
  * @see javafx.fxml.Initializable
  */
-public class DamageGUIController extends GUIController implements Initializable{
+public class DamageGUIController extends GUIController {
     @FXML
     private Label progressLabel;
     @FXML
@@ -45,7 +42,8 @@ public class DamageGUIController extends GUIController implements Initializable{
 
     //Override methods--------------------------------------------------------------------------------------------------
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void initialize(Main mainClass) {
+        super.initialize(mainClass);
         infoLabel.setText("Dear adventurer, how much damage have you taken?"); //TODO: move this to the FXML file
         textFieldLabel.setText("Damage taken:");
     }
@@ -83,7 +81,7 @@ public class DamageGUIController extends GUIController implements Initializable{
                 character.setHpCurr(total);
                 restoreImage.setImage(new Image("/com/roleplay/icons/skull.png"));
                 restoredLabel.setText("You received " + damage + " points of damage. Oh dear, you are dead!");
-            }else {
+            } else {
                 character.setHpCurr(total);
                 restoreImage.setImage(new Image("/com/roleplay/icons/sword.png"));
                 restoredLabel.setText("You received " + damage + " points of damage.");
@@ -105,10 +103,12 @@ public class DamageGUIController extends GUIController implements Initializable{
     }
 
     //Utility-----------------------------------------------------------------------------------------------------------
+
     /**
      * Class used to add a short wait.
      * This class is used to create a short delay before the DamageGUIController is switched back to the previous scene.
      * This class extends Task and is used to show the progress of the waiting period on a progress bar.
+     *
      * @see javafx.concurrent.Task
      */
     private class WaitingClass extends Task<Void> {
@@ -121,7 +121,7 @@ public class DamageGUIController extends GUIController implements Initializable{
         protected Void call() throws Exception {
             for (int i = 0; i < 50; i++) {
                 //increase work one by one
-                updateProgress(i +1, 50);
+                updateProgress(i + 1, 50);
                 Thread.sleep(50);
             }
             return null;
@@ -130,16 +130,13 @@ public class DamageGUIController extends GUIController implements Initializable{
         /**
          * Override method which executes at successful completion of the Thread.
          * Upon successful execution the method calls Main.chooseScene() to switch to the previous scene.
+         *
          * @see com.roleplay.Main
          */
         @Override
         protected void succeeded() {
             super.succeeded();
-            try {
-                mainClass.chooseScene(1);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            mainClass.chooseScene(1);
         }
     }
 
