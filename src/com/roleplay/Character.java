@@ -20,6 +20,9 @@ import java.io.File;
 @XmlRootElement(name = "character") //Defines the name of the root XML element
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Character {
+    //Attributes defined as XmlTransient to avoid saving them to XML file
+    @XmlTransient
+    private final String filepath = "./src/com/roleplay/XML/characterData.xml"; //constant used to save to/read xml file
     //attributes defined as XmlElements to be able to save them to XML file
     @XmlElement(name = "name")
     private String name;
@@ -47,10 +50,6 @@ public class Character {
     private int expMax;
     @XmlElement(name = "currentExperience")
     private int expCurr;
-
-    //Attributes defined as XmlTransient to avoid saving them to XML file
-    @XmlTransient
-    private final String filepath = "./src/com/roleplay/XML/characterData.xml"; //constant used to save to/read xml file
     @XmlTransient
     private int strbn, dexbn, conbn, intbn, wisbn, chabn;
 
@@ -162,6 +161,15 @@ public class Character {
     }
 
     /**
+     * Sets the current health of this Character
+     *
+     * @param hpCurr the new value of the current health
+     */
+    public void setHpCurr(int hpCurr) {
+        this.hpCurr = hpCurr;
+    }
+
+    /**
      * Gets the maximum magic points of this Character.
      *
      * @return The maximum magic points of this Character.
@@ -180,6 +188,15 @@ public class Character {
     }
 
     /**
+     * Sets the current magic points of this Character
+     *
+     * @param mpCurr the new value of the current magic points
+     */
+    public void setMpCurr(int mpCurr) {
+        this.mpCurr = mpCurr;
+    }
+
+    /**
      * Gets the maximum experience of this Character.
      *
      * @return The maximum experience of this Character.
@@ -188,6 +205,8 @@ public class Character {
         return expMax;
     }
 
+    //Setters-----------------------------------------------------------------------------------------------------------
+
     /**
      * Gets the current experience of this Character.
      *
@@ -195,6 +214,15 @@ public class Character {
      */
     public int getExpCurr() {
         return expCurr;
+    }
+
+    /**
+     * Sets the current health of this Character
+     *
+     * @param expCurr the new value of the current health
+     */
+    public void setExpCurr(int expCurr) {
+        this.expCurr = expCurr;
     }
 
     /**
@@ -222,7 +250,6 @@ public class Character {
         }
     }
 
-    //Setters-----------------------------------------------------------------------------------------------------------
     /**
      * Sets all the stats for this Character.
      *
@@ -234,7 +261,7 @@ public class Character {
      * @param cha    The charisma of this Character.
      * @param hpMax  The maximum health of this Character.
      * @param mpMax  The maximum magic points of this Character.
-     * @param expMax The maximum experience points of thi Caracter.
+     * @param expMax The maximum experience points of the Character.
      */
     private void setValues(int str, int dex, int con, int intel, int wis, int cha, int hpMax, int mpMax, int expMax) {
         //Sets all the stats for the character.
@@ -249,7 +276,7 @@ public class Character {
         this.mpMax = mpMax;
         mpCurr = mpMax;
         this.expMax = expMax;
-        expCurr = expMax;
+        expCurr = 0; //initial exp set to 0
 
         //Call setBonus() to set all the bonus values.
         setBonus();
@@ -266,33 +293,6 @@ public class Character {
         intbn = (intel - 10) / 2;
         wisbn = (wis - 10) / 2;
         chabn = (cha - 10) / 2;
-    }
-
-    /**
-     * Sets the current health of this Character
-     *
-     * @param hpCurr the new value of the current health
-     */
-    public void setHpCurr(int hpCurr) {
-        this.hpCurr = hpCurr;
-    }
-
-    /**
-     * Sets the current magic points of this Character
-     *
-     * @param mpCurr the new value of the current magic points
-     */
-    public void setMpCurr(int mpCurr) {
-        this.mpCurr = mpCurr;
-    }
-
-    /**
-     * Sets the current health of this Character
-     *
-     * @param expCurr the new value of the current health
-     */
-    public void setExpCurr(int expCurr) {
-        this.expCurr = expCurr;
     }
 
     //XML save/read methods---------------------------------------------------------------------------------------------
