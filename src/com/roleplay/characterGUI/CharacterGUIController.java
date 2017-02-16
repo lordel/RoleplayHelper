@@ -145,7 +145,7 @@ public class CharacterGUIController extends GUIController {
         chaBonus.setText(Integer.toString(character.getBonus(CharacterTraits.CHA)));
         hpValue.setText(Integer.toString(character.getHpCurr()));
         mpValue.setText(Integer.toString(character.getMpCurr()));
-        expValue.setText(Integer.toString(character.getExpCurr()));
+        expValue.setText(Integer.toString(character.getExpCurr()) + "/" + Integer.toString(character.getExpMax()));
 
         //Use the BarValueAndColor util to set both color and value of the progress bars
         BarValueAndColor.setBarValue(hpBar, character.getHpCurr(), character.getHpMax(), ProgressBarType.HP);
