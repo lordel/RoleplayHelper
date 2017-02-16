@@ -138,7 +138,7 @@ public class Main extends Application {
 
         //Access the scene's controller and set main class for future access
         GUIController control = loader.getController();
-        control.setMainClass(this);
+        control.initialize(this);
 
         //Set the style of the scene based on the previously chosen deity
         setStyle(scene);
