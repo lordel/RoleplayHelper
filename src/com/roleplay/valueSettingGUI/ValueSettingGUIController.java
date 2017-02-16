@@ -1,13 +1,14 @@
 package com.roleplay.valueSettingGUI;
 
 import com.roleplay.Character;
+import com.roleplay.Main;
 import com.roleplay.utils.GUIController;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 import javax.xml.bind.JAXBException;
-import java.io.IOException;
 
 /**
  * Controller in charge of the ValueSettingGUI actions.
@@ -17,11 +18,12 @@ import java.io.IOException;
  * in case of such situations. When the continue button is pressed any changes to the values are transferred to the
  * current Character. This class also allows for reading of the values from an XML file if one is present.
  * TODO: add error messages if XML cannot be read or is not present.
+ * TODO: add exp and mp
  * This class extends GUIController and implements the Initializable interface.
+ *
  * @see com.roleplay.utils.GUIController
- * @see javafx.fxml.Initializable
  */
-public class ValueSettingGUIController extends GUIController{
+public class ValueSettingGUIController extends GUIController {
     @FXML
     private TextField nameInput;
     @FXML
@@ -39,7 +41,27 @@ public class ValueSettingGUIController extends GUIController{
     @FXML
     private TextField maxHealthInput;
     @FXML
+    private TextField maxMpInput;
+    @FXML
+    private TextField maxExpInput;
+    @FXML
     private Label errorLabel;
+
+    //Override methods-------------------------------------------------------------------------------------------------
+
+    /**
+     * Initialize the controller
+     * This method overrides the default initialize() method from GUIController. It calls to the super default
+     * implementation and also sets the value of all the text fields to the values of the current character stats.
+     *
+     * @param mainClass The Main class instance to be stored.
+     * @see com.roleplay.utils.GUIController
+     */
+    @Override
+    public void initialize(Main mainClass) {
+        super.initialize(mainClass);
+        setValues(mainClass.getCharacter()); //set the initial values of all the text labels to match current character
+    }
 
     //Action listeners--------------------------------------------------------------------------------------------------
 
@@ -60,6 +82,8 @@ public class ValueSettingGUIController extends GUIController{
         wisInput.setStyle("-fx-border-color: none;");
         chaInput.setStyle("-fx-border-color: none;");
         maxHealthInput.setStyle("-fx-border-color: none;");
+        maxMpInput.setStyle("-fx-border-color: none;");
+        maxExpInput.setStyle("-fx-border-color: none;");
         errorLabel.setText("");
 
         if (nameInput.getText().equals("")) {
@@ -68,7 +92,7 @@ public class ValueSettingGUIController extends GUIController{
             return;
         }
 
-        int str, dex, con, intel, wis, cha, hpMax;
+        int str, dex, con, intel, wis, cha, hpMax, mpMax, expMax;
         try {
             str = Integer.parseInt(strInput.getText());
             if (str < 0) {
@@ -153,17 +177,35 @@ public class ValueSettingGUIController extends GUIController{
             errorLabel.setText("One or more of the fields does not contain a valid input");
             return;
         }
-        Character character = new Character(nameInput.getText(), str, dex, con, intel, wis, cha, hpMax);
+        try {
+            mpMax = Integer.parseInt(maxMpInput.getText());
+            if (mpMax < 0) {
+                maxMpInput.setStyle("-fx-border-color: red;");
+                errorLabel.setText("One or more of the fields does not contain a valid input");
+                return;
+            }
+        } catch (NumberFormatException e) {
+            maxMpInput.setStyle("-fx-border-color: red;");
+            errorLabel.setText("One or more of the fields does not contain a valid input");
+            return;
+        }
+        try {
+            expMax = Integer.parseInt(maxExpInput.getText());
+            if (expMax < 0) {
+                maxExpInput.setStyle("-fx-border-color: red;");
+                errorLabel.setText("One or more of the fields does not contain a valid input");
+                return;
+            }
+        } catch (NumberFormatException e) {
+            maxExpInput.setStyle("-fx-border-color: red;");
+            errorLabel.setText("One or more of the fields does not contain a valid input");
+            return;
+        }
+        Character character = new Character(nameInput.getText(), str, dex, con, intel, wis, cha, hpMax, mpMax, expMax);
+        //Set the main character to the newly generated one using the user input so the rest of the app can use it
         mainClass.setCharacter(character);
 
-        try {
-            mainClass.chooseScene(1);
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("Error switching scene");
-            System.out.println(e.getMessage());
-            System.exit(-2);
-        }
+        mainClass.chooseScene(1); //switch scene to CharacterGUI
     }
 
     /**
@@ -174,35 +216,28 @@ public class ValueSettingGUIController extends GUIController{
     @FXML
     private void readXMLPressed() {
         try {
-            Character tempCharacter = new Character();
+            Character character = new Character();
             character.readFromXML();
-            nameInput.setText(tempCharacter.getName());
-            strInput.setText(Integer.toString(tempCharacter.getStr()));
-            dexInput.setText(Integer.toString(tempCharacter.getDex()));
-            conInput.setText(Integer.toString(tempCharacter.getCon()));
-            intelInput.setText(Integer.toString(tempCharacter.getIntel()));
-            wisInput.setText(Integer.toString(tempCharacter.getWis()));
-            chaInput.setText(Integer.toString(tempCharacter.getCha()));
-            maxHealthInput.setText(Integer.toString(tempCharacter.getHpMax()));
-        } catch (JAXBException e){
-            //TODO: properly handle error message
-            System.out.println("Error reading info from file!! " + e.getMessage() + " Please try again.");
-        }
-    }
+            setValues(character);
+        } catch (JAXBException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Reading Data");
+            alert.setHeaderText("XML Reading Error");
+            alert.setContentText("Ooops, there was an error reading the information! Please try again.");
+            alert.showAndWait();
 
-    //To be removed
-    @Override
-    public void setCharacter(Character character) {
-        super.setCharacter(character);
-        setValues();
+            mainClass.chooseScene(2); //go back to this scene in case of error
+        }
     }
 
     //Utility-----------------------------------------------------------------------------------------------------------
 
     /**
-     * Sets all the TextLabel values to the corresponding values taken from the current Character.
+     * Sets all the TextLabel values to the corresponding values taken from the input Character.
+     *
+     * @param character the character to use to update the TextLabels values
      */
-    private void setValues() {
+    private void setValues(Character character) {
         if (character == null) return;
         nameInput.setText(character.getName());
         strInput.setText(Integer.toString(character.getStr()));
@@ -212,5 +247,7 @@ public class ValueSettingGUIController extends GUIController{
         wisInput.setText(Integer.toString(character.getWis()));
         chaInput.setText(Integer.toString(character.getCha()));
         maxHealthInput.setText(Integer.toString(character.getHpMax()));
+        maxMpInput.setText(Integer.toString(character.getMpMax()));
+        maxExpInput.setText(Integer.toString(character.getExpMax()));
     }
 }
