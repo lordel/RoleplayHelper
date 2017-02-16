@@ -34,20 +34,20 @@ public abstract class BarValueAndColor {
                 break;
             case MP:
                 if (percentage <= .25) {
-                    bar.setStyle("-fx-accent:red;");
-                } else if (percentage <= .5) {
                     bar.setStyle("-fx-accent:purple;");
+                } else if (percentage <= .5) {
+                    bar.setStyle("-fx-accent:darkcyan;");
                 } else {
-                    bar.setStyle("-fx-accent:blue;");
+                    bar.setStyle("-fx-accent:aqua;");
                 }
                 break;
             case EXP:
                 if (percentage <= .25) {
-                    bar.setStyle("-fx-accent:dark-green;");
+                    bar.setStyle("-fx-accent:lightseagreen;");
                 } else if (percentage <= .5) {
-                    bar.setStyle("-fx-accent:green;");
+                    bar.setStyle("-fx-accent:lightgreen;");
                 } else {
-                    bar.setStyle("-fx-accent:light-green;");
+                    bar.setStyle("-fx-accent:lawngreen;");
                 }
                 break;
         }
