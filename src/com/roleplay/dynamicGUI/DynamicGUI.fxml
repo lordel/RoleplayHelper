@@ -4,9 +4,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="root" stylesheets="/com/roleplay/CSS/generalStyle.css"
-          xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1"
-          fx:controller="com.roleplay.damageGUI.DamageGUIController">
+<GridPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+          minWidth="-Infinity" styleClass="root" stylesheets="/com/roleplay/CSS/generalStyle.css"
+          xmlns="http://javafx.com/javafx/8.0.60" fx:controller="com.roleplay.dynamicGUI.DynamicGUIController">
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
@@ -18,7 +18,7 @@
         <RowConstraints/>
         <RowConstraints/>
     </rowConstraints>
-    <Label fx:id="textFieldLabel" text="Damage/Restore" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+    <Label fx:id="textFieldLabel" text="Description" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
         <GridPane.margin>
             <Insets bottom="10.0" right="30.0"/>
         </GridPane.margin>
@@ -28,16 +28,16 @@
             <Insets bottom="10.0"/>
         </GridPane.margin>
     </TextField>
-    <Label fx:id="infoLabel" text="Information" GridPane.columnSpan="2">
+    <Label fx:id="titleLabel" text="Title" GridPane.columnSpan="2">
         <GridPane.margin>
             <Insets bottom="20.0"/>
         </GridPane.margin>
     </Label>
     <Button fx:id="confirmButton" mnemonicParsing="false" onAction="#confirmPressed" text="Confirm"
             GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2"/>
-    <ImageView fx:id="restoreImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true"
+    <ImageView fx:id="image" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true"
                GridPane.halignment="CENTER" GridPane.rowIndex="3"/>
-    <Label fx:id="restoredLabel" GridPane.columnIndex="1" GridPane.rowIndex="3" wrapText="true"/>
+    <Label fx:id="informationLabel" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
     <ProgressBar fx:id="progressBar" prefWidth="200.0" progress="0.0" GridPane.columnIndex="1"
                  GridPane.halignment="CENTER" GridPane.rowIndex="4">
         <GridPane.margin>

@@ -1,6 +1,7 @@
 package com.roleplay.utils;
 
 import com.roleplay.Main;
+import com.roleplay.enums.DynamicGUIType;
 
 /**
  * Abstract class providing the basic framework for Controllers used in this project.
@@ -10,6 +11,7 @@ import com.roleplay.Main;
  */
 public abstract class GUIController {
     protected Main mainClass;
+    protected DynamicGUIType guiType;
 
     /**
      * Initializes and sets the main class for this GUIController.
@@ -18,7 +20,8 @@ public abstract class GUIController {
      *
      * @param mainClass The Main class instance to be stored.
      */
-    public void initialize(Main mainClass) {
+    public void initialize(Main mainClass, DynamicGUIType guiType) {
         this.mainClass = mainClass;
+        this.guiType = guiType;
     }
 }

@@ -1,5 +1,5 @@
 .root{
--fx-background-color: linear-gradient(to bottom right, rgba(255,244,28,1) 0%, rgba(241,231,103,1) 29%, rgba(240,191,93,1) 56%, rgba(254,182,69,1) 100%);
+    -fx-background-color: linear-gradient(to bottom right, rgba(255,244,28,1) 0%, rgba(241,231,103,1) 29%, rgba(240,191,93,1) 56%, rgba(254,182,69,1) 100%);
 }
 
 .button{
