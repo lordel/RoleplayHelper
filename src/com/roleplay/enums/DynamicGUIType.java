@@ -1,8 +1,7 @@
 package com.roleplay.enums;
 
 /**
- * Created by loren on 4/21/2017. as part of package com.roleplay.enums.
- * TODO:ADD information
+ * Enum with a list of GUI types usable for the dynamic gui class
  * null is for any GUI that is not a dynamic gui
  */
 public enum DynamicGUIType {

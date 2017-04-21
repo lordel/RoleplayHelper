@@ -22,7 +22,7 @@ public abstract class BarValueAndColor {
     public static void setBarValue(ProgressBar bar, int current, int max, ProgressBarType type) {
         double percentage = (double) current / (double) max;
         switch (type) {
-            //TODO: fix coloring for the bars
+            //TODO: fix coloring for the bars, find the right ratio/colors for each
             case HP:
                 if (percentage <= .25) {
                     bar.setStyle("-fx-accent:red;");

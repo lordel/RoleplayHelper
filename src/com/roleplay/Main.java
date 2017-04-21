@@ -12,8 +12,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-//TODO: add proper enums. one for FXML sheets
-
 /**
  * Main class which starts the application GUIs.
  * This class controls which GUI is displayed. The character information input by the user is stored in a private
@@ -159,8 +157,6 @@ public class Main extends Application {
     /**
      * Sets the style for the input scene.
      * A CSS file is added to the input scene based on the deity that is currently set for this class.
-     * <p>
-     * TODO:add enum for stylesheets?
      *
      * @param scene the scene to which the stylesheet will be added and applied.
      */

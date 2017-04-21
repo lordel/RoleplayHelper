@@ -118,7 +118,7 @@ public class CharacterGUIController extends GUIController {
         noneRadio.setSelected(true);
 
         //set ComboBox items--------------------------------------------------------------------------------------------
-        comboBox.getItems().addAll("Edit Values", "Restore Health", "Take Damage", "Use Magic",
+        comboBox.getItems().addAll("Edit Values", "Restore Health", "Take Damage", "Use Magic", "Restore Magic",
                 "Add Experience Points", new Separator(), "Save Character Info");
 
         //Set initial  roll, bonus, and total to 0----------------------------------------------------------------------
@@ -302,11 +302,15 @@ public class CharacterGUIController extends GUIController {
                     Platform.runLater(() -> comboBox.getSelectionModel().clearSelection());
                     break;
                 case "Use Magic":
-                    mainClass.chooseScene(GUIs.MAGIC); //TODO: need a scene for this
+                    mainClass.chooseScene(GUIs.MAGIC);
+                    Platform.runLater(() -> comboBox.getSelectionModel().clearSelection());
+                    break;
+                case "Restore Magic":
+                    mainClass.chooseScene(GUIs.MAGIC); //TODO: need a new scene for this
                     Platform.runLater(() -> comboBox.getSelectionModel().clearSelection());
                     break;
                 case "Add Experience Points":
-                    mainClass.chooseScene(GUIs.EXPERIENCE); //TODO: need a scene for this
+                    mainClass.chooseScene(GUIs.EXPERIENCE);
                     Platform.runLater(() -> comboBox.getSelectionModel().clearSelection());
                     break;
                 case "Save Character Info":
