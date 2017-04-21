@@ -1,6 +1,8 @@
 package com.roleplay.saveXMLGUI;
 
 import com.roleplay.Main;
+import com.roleplay.enums.DynamicGUIType;
+import com.roleplay.enums.GUIs;
 import com.roleplay.utils.GUIController;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
@@ -31,8 +33,8 @@ public class SaveXMLGUIController extends GUIController {
      * before switching the scene back to the original one.
      */
     @Override
-    public void initialize(Main mainClass) {
-        super.initialize(mainClass);
+    public void initialize(Main mainClass, DynamicGUIType guiType) {
+        super.initialize(mainClass, guiType);
 
         try {
             mainClass.getCharacter().saveToXML(); //save Character information
@@ -43,7 +45,7 @@ public class SaveXMLGUIController extends GUIController {
             alert.setContentText("Ooops, there was an error saving the information! Please try again.");
             alert.showAndWait();
 
-            mainClass.chooseScene(1);
+            mainClass.chooseScene(GUIs.CHARACTER);
         }
 
         //Initialize a WaitingClass, it will save character data to XML
@@ -89,7 +91,7 @@ public class SaveXMLGUIController extends GUIController {
         @Override
         protected void succeeded() {
             super.succeeded();
-            mainClass.chooseScene(1);
+            mainClass.chooseScene(GUIs.CHARACTER);
         }
     }
 

@@ -3,6 +3,8 @@ package com.roleplay.characterGUI;
 import com.roleplay.Character;
 import com.roleplay.Main;
 import com.roleplay.enums.CharacterTraits;
+import com.roleplay.enums.DynamicGUIType;
+import com.roleplay.enums.GUIs;
 import com.roleplay.enums.ProgressBarType;
 import com.roleplay.utils.BarValueAndColor;
 import com.roleplay.utils.Die;
@@ -102,8 +104,8 @@ public class CharacterGUIController extends GUIController {
      * total to 0. It also initializes the labels to the correct values based on the current Character.
      */
     @Override
-    public void initialize(Main mainClass) {
-        super.initialize(mainClass);
+    public void initialize(Main mainClass, DynamicGUIType guiType) {
+        super.initialize(mainClass, guiType);
         //Create a group for the radio buttons and add all of them to it------------------------------------------------
         radioGroup = new ToggleGroup();
         noneRadio.setToggleGroup(radioGroup);
@@ -288,27 +290,27 @@ public class CharacterGUIController extends GUIController {
              */
             switch ((String) comboBox.getValue()) {
                 case "Restore Health":
-                    mainClass.chooseScene(3);
+                    mainClass.chooseScene(GUIs.HEALTH);
                     Platform.runLater(() -> comboBox.getSelectionModel().clearSelection());
                     break;
                 case "Take Damage":
-                    mainClass.chooseScene(4);
+                    mainClass.chooseScene(GUIs.DAMAGE);
                     Platform.runLater(() -> comboBox.getSelectionModel().clearSelection());
                     break;
                 case "Edit Values":
-                    mainClass.chooseScene(2);
+                    mainClass.chooseScene(GUIs.VALUE_SETTING);
                     Platform.runLater(() -> comboBox.getSelectionModel().clearSelection());
                     break;
                 case "Use Magic":
-                    mainClass.chooseScene(5); //TODO: need a scene for this
+                    mainClass.chooseScene(GUIs.MAGIC); //TODO: need a scene for this
                     Platform.runLater(() -> comboBox.getSelectionModel().clearSelection());
                     break;
                 case "Add Experience Points":
-                    mainClass.chooseScene(5); //TODO: need a scene for this
+                    mainClass.chooseScene(GUIs.EXPERIENCE); //TODO: need a scene for this
                     Platform.runLater(() -> comboBox.getSelectionModel().clearSelection());
                     break;
                 case "Save Character Info":
-                    mainClass.chooseScene(5);
+                    mainClass.chooseScene(GUIs.SAVING);
                     Platform.runLater(() -> comboBox.getSelectionModel().clearSelection());
                     break;
             }

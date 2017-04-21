@@ -2,6 +2,8 @@ package com.roleplay.valueSettingGUI;
 
 import com.roleplay.Character;
 import com.roleplay.Main;
+import com.roleplay.enums.DynamicGUIType;
+import com.roleplay.enums.GUIs;
 import com.roleplay.utils.GUIController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -56,8 +58,8 @@ public class ValueSettingGUIController extends GUIController {
      * @see com.roleplay.utils.GUIController
      */
     @Override
-    public void initialize(Main mainClass) {
-        super.initialize(mainClass);
+    public void initialize(Main mainClass, DynamicGUIType guiType) {
+        super.initialize(mainClass, guiType);
         setValues(mainClass.getCharacter()); //set the initial values of all the text labels to match current character
     }
 
@@ -203,7 +205,7 @@ public class ValueSettingGUIController extends GUIController {
         //Set the main character to the newly generated one using the user input so the rest of the app can use it
         mainClass.setCharacter(character);
 
-        mainClass.chooseScene(1); //switch scene to CharacterGUI
+        mainClass.chooseScene(GUIs.CHARACTER); //switch scene to CharacterGUI
     }
 
     /**
@@ -224,7 +226,7 @@ public class ValueSettingGUIController extends GUIController {
             alert.setContentText("Ooops, there was an error reading the information! Please try again.");
             alert.showAndWait();
 
-            mainClass.chooseScene(2); //go back to this scene in case of error
+            mainClass.chooseScene(GUIs.VALUE_SETTING); //go back to this scene in case of error
         }
     }
 

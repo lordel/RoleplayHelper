@@ -1,6 +1,7 @@
 package com.roleplay.deityChoiceGUI;
 
 import com.roleplay.enums.Deities;
+import com.roleplay.enums.GUIs;
 import com.roleplay.utils.GUIController;
 import javafx.fxml.FXML;
 
@@ -26,7 +27,7 @@ public class DeityChoiceGUIController extends GUIController{
     @FXML
     private void fiercePressed() throws IOException {
         mainClass.setDeityChoice(Deities.FIERCE);
-        mainClass.chooseScene(2);
+        mainClass.chooseScene(GUIs.VALUE_SETTING);
     }
 
     /**
@@ -39,7 +40,7 @@ public class DeityChoiceGUIController extends GUIController{
     @FXML
     private void majoraPressed() throws IOException {
         mainClass.setDeityChoice(Deities.MAJORA);
-        mainClass.chooseScene(2);
+        mainClass.chooseScene(GUIs.VALUE_SETTING);
     }
 
     /**
@@ -52,7 +53,7 @@ public class DeityChoiceGUIController extends GUIController{
     @FXML
     private void demisePressed() throws IOException {
         mainClass.setDeityChoice(Deities.DEMISE);
-        mainClass.chooseScene(2);
+        mainClass.chooseScene(GUIs.VALUE_SETTING);
     }
 
     /**
@@ -65,7 +66,7 @@ public class DeityChoiceGUIController extends GUIController{
     @FXML
     private void ghirahimPressed() throws IOException {
         mainClass.setDeityChoice(Deities.GHIRAHIM);
-        mainClass.chooseScene(2);
+        mainClass.chooseScene(GUIs.VALUE_SETTING);
     }
 
     /**
@@ -78,7 +79,7 @@ public class DeityChoiceGUIController extends GUIController{
     @FXML
     private void farorePressed() throws IOException {
         mainClass.setDeityChoice(Deities.FARORE);
-        mainClass.chooseScene(2);
+        mainClass.chooseScene(GUIs.VALUE_SETTING);
     }
 
     /**
@@ -91,7 +92,7 @@ public class DeityChoiceGUIController extends GUIController{
     @FXML
     private void hyliaPressed() throws IOException {
         mainClass.setDeityChoice(Deities.HYLIA);
-        mainClass.chooseScene(2);
+        mainClass.chooseScene(GUIs.VALUE_SETTING);
     }
 
     /**
@@ -104,7 +105,7 @@ public class DeityChoiceGUIController extends GUIController{
     @FXML
     private void nayruPressed() throws IOException {
         mainClass.setDeityChoice(Deities.NAYRU);
-        mainClass.chooseScene(2);
+        mainClass.chooseScene(GUIs.VALUE_SETTING);
     }
 
     /**
@@ -117,6 +118,6 @@ public class DeityChoiceGUIController extends GUIController{
     @FXML
     private void dinPressed() throws IOException {
         mainClass.setDeityChoice(Deities.DIN);
-        mainClass.chooseScene(2);
+        mainClass.chooseScene(GUIs.VALUE_SETTING);
     }
 }

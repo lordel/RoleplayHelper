@@ -2,6 +2,8 @@ package com.roleplay.damageGUI;
 
 import com.roleplay.Character;
 import com.roleplay.Main;
+import com.roleplay.enums.DynamicGUIType;
+import com.roleplay.enums.GUIs;
 import com.roleplay.utils.GUIController;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
@@ -22,6 +24,7 @@ import javafx.scene.image.ImageView;
  * @see com.roleplay.utils.GUIController
  * @see javafx.fxml.Initializable
  */
+@Deprecated
 public class DamageGUIController extends GUIController {
     @FXML
     private Label progressLabel;
@@ -42,8 +45,8 @@ public class DamageGUIController extends GUIController {
 
     //Override methods--------------------------------------------------------------------------------------------------
     @Override
-    public void initialize(Main mainClass) {
-        super.initialize(mainClass);
+    public void initialize(Main mainClass, DynamicGUIType guiType) {
+        super.initialize(mainClass, guiType);
         textFieldLabel.setText("Damage taken:");
     }
 
@@ -135,7 +138,7 @@ public class DamageGUIController extends GUIController {
         @Override
         protected void succeeded() {
             super.succeeded();
-            mainClass.chooseScene(1);
+            mainClass.chooseScene(GUIs.CHARACTER);
         }
     }
 

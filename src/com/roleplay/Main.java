@@ -1,6 +1,8 @@
 package com.roleplay;
 
 import com.roleplay.enums.Deities;
+import com.roleplay.enums.DynamicGUIType;
+import com.roleplay.enums.GUIs;
 import com.roleplay.utils.GUIController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -18,6 +20,7 @@ import java.io.IOException;
  * attribute and shared with all the other GUIs when they are initialized. All GUIs used in conjunction with Main
  * should extend the GUIController class. This class' methods are used to switch the current scene displayed by the
  * application.
+ *
  * @see com.roleplay.utils.GUIController
  */
 public class Main extends Application {
@@ -44,7 +47,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         mainStage = primaryStage;
 
-        loadScene("deityChoiceGUI/DeityChoiceGUI.fxml");
+        loadScene("deityChoiceGUI/DeityChoiceGUI.fxml", DynamicGUIType.NULL);
 
         mainStage.setTitle("RolePlay Helper");
         mainStage.show();
@@ -89,26 +92,30 @@ public class Main extends Application {
      * Based on the specified choice main will switch the current scene to a new one. The previous scene can be garbage
      * collected and the new scene is initialized from scratch loading the corresponding FXML file.
      *
-     * @param choice integer which specified the chosen scene.
+     * @param choice GUI to be selected for displaying.
      */
-    public void chooseScene(int choice) {
-        //TODO: add enum for this
-        //TODO: add scene for mp and exp
+    public void chooseScene(GUIs choice) {
         switch (choice) {
-            case 1:
-                loadScene("characterGUI/CharacterGUI.fxml");
+            case CHARACTER:
+                loadScene("characterGUI/CharacterGUI.fxml", DynamicGUIType.NULL);
                 break;
-            case 2:
-                loadScene("valueSettingGUI/ValueSettingGUI.fxml");
+            case DAMAGE:
+                loadScene("dynamicGUI/DynamicGUI.fxml", DynamicGUIType.DAMAGE);
                 break;
-            case 3:
-                loadScene("restoreHealthGUI/RestoreHealthGUI.fxml");
+            case MAGIC:
+                loadScene("dynamicGUI/DynamicGUI.fxml", DynamicGUIType.MAGIC);
                 break;
-            case 4:
-                loadScene("DamageGUI/DamageGUI.fxml");
+            case EXPERIENCE:
+                loadScene("dynamicGUI/DynamicGUI.fxml", DynamicGUIType.EXPERIENCE);
                 break;
-            case 5:
-                loadScene("saveXMLGUI/SaveXMLGUI.fxml");
+            case HEALTH:
+                loadScene("dynamicGUI/DynamicGUI.fxml", DynamicGUIType.HEALTH);
+                break;
+            case SAVING:
+                loadScene("dynamicGUI/DynamicGUI.fxml", DynamicGUIType.SAVING);
+                break;
+            case VALUE_SETTING:
+                loadScene("valueSettingGUI/ValueSettingGUI.fxml", DynamicGUIType.NULL);
                 break;
         }
     }
@@ -118,8 +125,9 @@ public class Main extends Application {
      * Uses the specified fxmlPath to load a new scene based on the FXML file specified.
      *
      * @param fxmlPath path to the FXML file to be used to load the scene
+     * @param guiType  the type of the GUI which will be loaded, used to determine the type of a DynamicGUI
      */
-    private void loadScene(String fxmlPath) {
+    private void loadScene(String fxmlPath, DynamicGUIType guiType) {
         //Loader and Scene are created using the standard JavaFX way of loading from FXML file
         FXMLLoader loader = new FXMLLoader(Main.class.getResource(fxmlPath));
         Scene scene = null; //This makes sure scope is outside of try block.
@@ -137,9 +145,9 @@ public class Main extends Application {
             e.printStackTrace(); //Abort application
         }
 
-        //Access the scene's controller and set main class for future access
+        //Access the scene's controller and set main class and guiType for future access
         GUIController control = loader.getController();
-        control.initialize(this);
+        control.initialize(this, guiType);
 
         //Set the style of the scene based on the previously chosen deity
         setStyle(scene);
@@ -151,6 +159,8 @@ public class Main extends Application {
     /**
      * Sets the style for the input scene.
      * A CSS file is added to the input scene based on the deity that is currently set for this class.
+     * <p>
+     * TODO:add enum for stylesheets?
      *
      * @param scene the scene to which the stylesheet will be added and applied.
      */
