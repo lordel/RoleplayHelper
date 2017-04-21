@@ -44,7 +44,6 @@ public class RestoreHealthGUIController extends GUIController {
     @Override
     public void initialize(Main mainClass) {
         super.initialize(mainClass);
-        infoLabel.setText("How much health did you restore?"); //TODO: remove this and move to FXML file
         textFieldLabel.setText("Health restored:");
     }
 

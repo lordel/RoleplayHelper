@@ -11,7 +11,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 //TODO: add proper enums. one for FXML sheets
-//TODO: Add javadoc for everything
 
 /**
  * Main class which starts the application GUIs.
@@ -54,15 +53,6 @@ public class Main extends Application {
     //Setters-----------------------------------------------------------------------------------------------------------
 
     /**
-     * Sets the character of this class to the provided character.
-     *
-     * @param character the Character input that will replace the current character of this class.
-     */
-    public void setCharacter(Character character) {
-        this.character = character;
-    }
-
-    /**
      * Sets the deity for the program.
      * The choice of deity determines the overall look and feel of the application. This method sets the deity attribute
      * of this class.
@@ -72,7 +62,6 @@ public class Main extends Application {
     public void setDeityChoice(Deities deityChoice) {
         this.deityChoice = deityChoice;
     }
-    //Getters-----------------------------------------------------------------------------------------------------------
 
     /**
      * Gets the character attribute of this class.
@@ -82,8 +71,19 @@ public class Main extends Application {
     public Character getCharacter() {
         return character;
     }
+    //Getters-----------------------------------------------------------------------------------------------------------
+
+    /**
+     * Sets the character of this class to the provided character.
+     *
+     * @param character the Character input that will replace the current character of this class.
+     */
+    public void setCharacter(Character character) {
+        this.character = character;
+    }
 
     //Utility-----------------------------------------------------------------------------------------------------------
+
     /**
      * Method to change the current scene displayed by this Main class.
      * Based on the specified choice main will switch the current scene to a new one. The previous scene can be garbage
@@ -93,6 +93,7 @@ public class Main extends Application {
      */
     public void chooseScene(int choice) {
         //TODO: add enum for this
+        //TODO: add scene for mp and exp
         switch (choice) {
             case 1:
                 loadScene("characterGUI/CharacterGUI.fxml");

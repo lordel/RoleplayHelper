@@ -4,8 +4,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="root" stylesheets="/com/roleplay/CSS/generalStyle.css"
-          xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1"
+<GridPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+          minWidth="-Infinity" styleClass="root"
+          stylesheets="/com/roleplay/CSS/generalStyle.css" xmlns="http://javafx.com/javafx/8.0.60"
           fx:controller="com.roleplay.damageGUI.DamageGUIController">
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
@@ -28,7 +29,7 @@
             <Insets bottom="10.0"/>
         </GridPane.margin>
     </TextField>
-    <Label fx:id="infoLabel" text="Information" GridPane.columnSpan="2">
+    <Label fx:id="infoLabel" text="Dear adventurer, how much damage have you taken?" GridPane.columnSpan="2">
         <GridPane.margin>
             <Insets bottom="20.0"/>
         </GridPane.margin>

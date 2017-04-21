@@ -17,8 +17,6 @@ import javax.xml.bind.JAXBException;
  * by inputting new values in the textFields. Checks for invalid input are in place and error messages are displayed
  * in case of such situations. When the continue button is pressed any changes to the values are transferred to the
  * current Character. This class also allows for reading of the values from an XML file if one is present.
- * TODO: add error messages if XML cannot be read or is not present.
- * TODO: add exp and mp
  * This class extends GUIController and implements the Initializable interface.
  *
  * @see com.roleplay.utils.GUIController

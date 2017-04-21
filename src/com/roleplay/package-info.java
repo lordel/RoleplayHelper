@@ -6,6 +6,6 @@
  * TODO: Add CSS descriptions in each CSS file
  * TODO: Add info about waiting class here in this file
  * TODO: check all classes' documentation for up to date information
- * TODO: Add exp and mp setting classes, or create a general class which can switch for it
+ * TODO: IMPORTANT Add exp and mp setting classes, or create a general class which can used for damage, health, mp, and exp dynamically
  */
 package com.roleplay;

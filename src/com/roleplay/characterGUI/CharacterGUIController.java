@@ -11,23 +11,18 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
-import java.io.IOException;
-
-
 /**
  * Controller in charge of the CharacterGUI actions.
  * This class is linked to the CharacterGUI.fxml file. It provides methods for actions performed by the user on the GUI.
- * This class extends GUIController and implements the Initializable interface.
+ * This class extends GUIController.
  *
  * @see com.roleplay.utils.GUIController
- * @see javafx.fxml.Initializable
  */
 public class CharacterGUIController extends GUIController {
     private ToggleGroup radioGroup; //group to combine all radio buttons
     //Character attribute fields----------------------------------------------------------------------------------------
     @FXML
     private Label name;
-
     @FXML
     private Label str;
     @FXML
@@ -96,8 +91,10 @@ public class CharacterGUIController extends GUIController {
     //Options-----------------------------------------------------------------------------------------------------------
     @FXML
     private ComboBox<Object> comboBox; //combo box of objects to allow for Separator objects
+    //TODO: need to look into other, prettier, options other than  (maybe a menubar, or such)
 
     //Override methods--------------------------------------------------------------------------------------------------
+
     /**
      * Default initialize() method.
      * This method generates a toggle group and links all the radio buttons to it so that only one can be selected at a
@@ -119,9 +116,8 @@ public class CharacterGUIController extends GUIController {
         noneRadio.setSelected(true);
 
         //set ComboBox items--------------------------------------------------------------------------------------------
-        comboBox.getItems().addAll("Edit Values", "Restore Health", "Take Damage", "Use Magic", new Separator(),
-                "Save Character Info"); //TODO: add implementation for magic points and exp
-        //TODO: need to look into other options other than combobox
+        comboBox.getItems().addAll("Edit Values", "Restore Health", "Take Damage", "Use Magic",
+                "Add Experience Points", new Separator(), "Save Character Info");
 
         //Set initial  roll, bonus, and total to 0----------------------------------------------------------------------
         roll.setText("0");
@@ -145,7 +141,8 @@ public class CharacterGUIController extends GUIController {
         chaBonus.setText(Integer.toString(character.getBonus(CharacterTraits.CHA)));
         hpValue.setText(Integer.toString(character.getHpCurr()));
         mpValue.setText(Integer.toString(character.getMpCurr()));
-        expValue.setText(Integer.toString(character.getExpCurr()) + "/" + Integer.toString(character.getExpMax()));
+        //experience is set as current / maximum so the user can know exactly how much he needs to level up
+        expValue.setText(Integer.toString(character.getExpCurr()) + " / " + Integer.toString(character.getExpMax()));
 
         //Use the BarValueAndColor util to set both color and value of the progress bars
         BarValueAndColor.setBarValue(hpBar, character.getHpCurr(), character.getHpMax(), ProgressBarType.HP);
@@ -228,6 +225,7 @@ public class CharacterGUIController extends GUIController {
      * This method is executed when the D12 button is pressed. It randomly rolls the die using the Die class, gets the
      * bonus from the current Character, and adds it to the result of the roll to get the total. It then sets the values
      * of the roll, bonus, and total text labels to match the results.
+     *
      * @see com.roleplay.utils.Die
      */
     @FXML
@@ -280,12 +278,14 @@ public class CharacterGUIController extends GUIController {
      * the necessary action based on the value selected by the user. It then proceeds to reset the selection of the
      * ComboBox.
      *
-     * @throws IOException Possibly thrown by Main's chooseScene() method when it is called.
      * @see com.roleplay.Main
      */
     @FXML
-    private void optionSelected() throws IOException {
+    private void optionSelected() {
         try {
+            /* Platform.runLater() used to perform async clearing of the ComboCox (the action listener would be
+             * triggered otherwise and result in infinite loops or runtime exceptions).
+             */
             switch ((String) comboBox.getValue()) {
                 case "Restore Health":
                     mainClass.chooseScene(3);
@@ -297,6 +297,14 @@ public class CharacterGUIController extends GUIController {
                     break;
                 case "Edit Values":
                     mainClass.chooseScene(2);
+                    Platform.runLater(() -> comboBox.getSelectionModel().clearSelection());
+                    break;
+                case "Use Magic":
+                    mainClass.chooseScene(5); //TODO: need a scene for this
+                    Platform.runLater(() -> comboBox.getSelectionModel().clearSelection());
+                    break;
+                case "Add Experience Points":
+                    mainClass.chooseScene(5); //TODO: need a scene for this
                     Platform.runLater(() -> comboBox.getSelectionModel().clearSelection());
                     break;
                 case "Save Character Info":
@@ -314,7 +322,7 @@ public class CharacterGUIController extends GUIController {
 
     /**
      * Returns CharacterTrait based on which radioButton is selected.
-     * This method checks all radioButtons in the radioGroup to see which is selected. Based on which is selcted it
+     * This method checks all radioButtons in the radioGroup to see which is selected. Based on which is selected, it
      * returns the corresponding CharacterTrait.
      *
      * @return Returns a CharacterTraits value.

@@ -15,6 +15,7 @@ import java.io.File;
  * charisma, health, magic points, and experience. This class stores both maximum health and current health.
  * Bonuses for each stat which has one is automatically calculated. All the current values stored in this class
  * can be saved to an XML file and a previously saved XML file can be used to read values into this class.
+ * TODO: Add character level?
  */
 //We define XML elements to allow saving the data to an XML file
 @XmlRootElement(name = "character") //Defines the name of the root XML element
@@ -205,8 +206,6 @@ public class Character {
         return expMax;
     }
 
-    //Setters-----------------------------------------------------------------------------------------------------------
-
     /**
      * Gets the current experience of this Character.
      *
@@ -224,6 +223,8 @@ public class Character {
     public void setExpCurr(int expCurr) {
         this.expCurr = expCurr;
     }
+
+    //Setters-----------------------------------------------------------------------------------------------------------
 
     /**
      * Gets one of the bonus values from this Character.

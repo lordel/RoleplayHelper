@@ -44,7 +44,6 @@ public class DamageGUIController extends GUIController {
     @Override
     public void initialize(Main mainClass) {
         super.initialize(mainClass);
-        infoLabel.setText("Dear adventurer, how much damage have you taken?"); //TODO: move this to the FXML file
         textFieldLabel.setText("Damage taken:");
     }
 
