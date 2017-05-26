@@ -100,8 +100,11 @@ public class Main extends Application {
             case DAMAGE:
                 loadScene("dynamicGUI/DynamicGUI.fxml", DynamicGUIType.DAMAGE);
                 break;
-            case MAGIC:
-                loadScene("dynamicGUI/DynamicGUI.fxml", DynamicGUIType.MAGIC);
+            case MAGIC_USE:
+                loadScene("dynamicGUI/DynamicGUI.fxml", DynamicGUIType.MAGIC_USE);
+                break;
+            case MAGIC_RESTORE:
+                loadScene("dynamicGUI/DynamicGUI.fxml", DynamicGUIType.MAGIC_RESTORE);
                 break;
             case EXPERIENCE:
                 loadScene("dynamicGUI/DynamicGUI.fxml", DynamicGUIType.EXPERIENCE);

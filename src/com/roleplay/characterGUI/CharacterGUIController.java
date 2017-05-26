@@ -302,11 +302,11 @@ public class CharacterGUIController extends GUIController {
                     Platform.runLater(() -> comboBox.getSelectionModel().clearSelection());
                     break;
                 case "Use Magic":
-                    mainClass.chooseScene(GUIs.MAGIC);
+                    mainClass.chooseScene(GUIs.MAGIC_USE);
                     Platform.runLater(() -> comboBox.getSelectionModel().clearSelection());
                     break;
                 case "Restore Magic":
-                    mainClass.chooseScene(GUIs.MAGIC); //TODO: need a new scene for this
+                    mainClass.chooseScene(GUIs.MAGIC_RESTORE);
                     Platform.runLater(() -> comboBox.getSelectionModel().clearSelection());
                     break;
                 case "Add Experience Points":
