@@ -35,7 +35,6 @@ public class DynamicGUIController extends GUIController {
     //Override methods--------------------------------------------------------------------------------------------------
     @Override
     public void initialize(Main mainClass, DynamicGUIType guiType) {
-        //TODO: add magic restore function!
         //TODO: comment code to clarify what is happening!!
         super.initialize(mainClass, guiType);
         progressLabel.setVisible(false);
@@ -49,9 +48,13 @@ public class DynamicGUIController extends GUIController {
                 titleLabel.setText("How much damage have you taken?");
                 textFieldLabel.setText("Damage taken:");
                 break;
-            case MAGIC:
+            case MAGIC_USE:
                 titleLabel.setText("How much magic have you used?");
-                textFieldLabel.setText("magic used:");
+                textFieldLabel.setText("Magic used:");
+                break;
+            case MAGIC_RESTORE:
+                titleLabel.setText("How much magic point are you restoring?");
+                textFieldLabel.setText("Magic points restored:");
                 break;
             case EXPERIENCE:
                 titleLabel.setText("How much experience points have you gained?");
@@ -183,7 +186,7 @@ public class DynamicGUIController extends GUIController {
                     textFieldLabel.setText("Invalid input, try again:");
                 }
                 break;
-            case MAGIC:
+            case MAGIC_USE:
                 //Reset the labels to the original value in case they were modified because of an error
                 textFieldLabel.setText("Magic used:");
                 textField.setStyle("-fx-border-color: none;");
@@ -209,6 +212,47 @@ public class DynamicGUIController extends GUIController {
                         character.setMpCurr(total);
                         image.setImage(new Image("/com/roleplay/icons/sword.png")); //TODO:find image
                         informationLabel.setText("You used " + used + " points of magic.");
+                    }
+
+                    mainClass.setCharacter(character);
+
+                    //Show progress label and start short wait with progressbar before returning to previous screen-------------
+                    confirmButton.setDisable(true);
+                    progressLabel.setVisible(true);
+                    progressBar.setVisible(true);
+                    WaitingClass wait = new WaitingClass();
+                    progressBar.progressProperty().bind(wait.progressProperty());
+                    new Thread(wait).start();
+                } catch (NumberFormatException e) {
+                    textField.setStyle("-fx-border-color: red;");
+                    textFieldLabel.setText("Invalid input, try again:");
+                }
+                break;
+            case MAGIC_RESTORE:
+                //Reset the labels to the original value in case they were modified because of an error
+                textFieldLabel.setText("Magic points restored:");
+                textField.setStyle("-fx-border-color: none;");
+
+                try {
+                    int restored = Integer.parseInt(textField.getText());
+                    if (restored < 0) {
+                        //check for negative input and exit method if found
+                        textField.setStyle("-fx-border-color: red;");
+                        textFieldLabel.setText("Invalid input, try again:");
+                        return;
+                    }
+
+                    Character character = mainClass.getCharacter(); //get the current Character from Main
+                    int total = character.getMpCurr() + restored; //calculate the total magic points after taking usage
+
+                    if (total > (character.getMpMax())) {
+                        character.setMpCurr(character.getMpMax());
+                        image.setImage(new Image("/com/roleplay/icons/skull.png")); //TODO:find image
+                        informationLabel.setText("You restored " + restored + " magic points. Your magic bar is now full!");
+                    } else {
+                        character.setMpCurr(total);
+                        image.setImage(new Image("/com/roleplay/icons/sword.png")); //TODO:find image
+                        informationLabel.setText("You restored " + restored + " points of magic.");
                     }
 
                     mainClass.setCharacter(character);

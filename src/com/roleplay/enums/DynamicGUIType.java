@@ -5,5 +5,5 @@ package com.roleplay.enums;
  * null is for any GUI that is not a dynamic gui
  */
 public enum DynamicGUIType {
-    NULL, DAMAGE, HEALTH, MAGIC, EXPERIENCE, SAVING
+    NULL, DAMAGE, HEALTH, MAGIC_USE, MAGIC_RESTORE, EXPERIENCE, SAVING
 }
