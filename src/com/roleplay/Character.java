@@ -47,8 +47,8 @@ public class Character {
     private int mpMax;
     @XmlElement(name = "currentMagic")
     private int mpCurr;
-    @XmlElement(name = "currentExperience")
-    private int expCurr;
+    @XmlElement(name = "Experience")
+    private int exp;
     @XmlTransient
     private int strbn, dexbn, conbn, intbn, wisbn, chabn;
 
@@ -210,16 +210,16 @@ public class Character {
      * @return The current experience of this Character.
      */
     public int getExpCurr() {
-        return expCurr;
+        return exp;
     }
 
     /**
      * Sets the current health of this Character
      *
-     * @param expCurr the new value of the current health
+     * @param exp the new value of the current health
      */
-    public void setExpCurr(int expCurr) {
-        this.expCurr = expCurr;
+    public void setExpCurr(int exp) {
+        this.exp = exp;
     }
 
     //Setters-----------------------------------------------------------------------------------------------------------
@@ -274,8 +274,7 @@ public class Character {
         hpCurr = hpMax; //current hp
         this.mpMax = mpMax;
         mpCurr = mpMax;
-        this.expMax = expMax;
-        expCurr = 0; //initial exp set to 0
+        exp = 0; //initial exp set to 0
 
         //Call setBonus() to set all the bonus values.
         setBonus();
@@ -330,7 +329,6 @@ public class Character {
         hpCurr = readCharacter.hpCurr;
         mpMax = readCharacter.mpMax;
         mpCurr = readCharacter.mpCurr;
-        expMax = readCharacter.expMax;
-        expCurr = readCharacter.expCurr;
+        exp = readCharacter.exp;
     }
 }
