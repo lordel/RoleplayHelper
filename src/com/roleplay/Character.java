@@ -47,8 +47,6 @@ public class Character {
     private int mpMax;
     @XmlElement(name = "currentMagic")
     private int mpCurr;
-    @XmlElement(name = "maximumExperience")
-    private int expMax;
     @XmlElement(name = "currentExperience")
     private int expCurr;
     @XmlTransient
