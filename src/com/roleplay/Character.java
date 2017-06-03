@@ -50,7 +50,7 @@ public class Character {
     @XmlElement(name = "Experience")
     private int exp;
     @XmlTransient
-    private int strbn, dexbn, conbn, intbn, wisbn, chabn;
+    private int strbn, dexbn, conbn, intbn, wisbn, chabn, expMax, level;
 
     /**
      * Default constructor creates Character with empty values.
@@ -69,11 +69,12 @@ public class Character {
      * @param wis   The wisdom of the Character.
      * @param cha   The charisma of the Character.
      * @param hpMax The maximum health value of the Character.
+     * @param exp   The current experience of the Character.
      */
     public Character(String name, int str, int dex, int con, int intel, int wis, int cha, int hpMax, int mpMax,
-                     int expMax) {
+                     int exp) {
         this.name = name;
-        setValues(str, dex, con, intel, wis, cha, hpMax, mpMax, expMax);
+        setValues(str, dex, con, intel, wis, cha, hpMax, mpMax, exp);
     }
 
     //Getters-----------------------------------------------------------------------------------------------------------
@@ -209,7 +210,7 @@ public class Character {
      *
      * @return The current experience of this Character.
      */
-    public int getExpCurr() {
+    public int getExp() {
         return exp;
     }
 
@@ -218,8 +219,20 @@ public class Character {
      *
      * @param exp the new value of the current health
      */
-    public void setExpCurr(int exp) {
+    public void setExp(int exp) {
         this.exp = exp;
+        //TODO: determine exp ranges for each level
+        if (exp > 0 && exp < 1000) {
+            level = 1;
+            expMax = 1000;
+        } else if (exp >= 1000 && exp < 2000) {
+            level = 2;
+            expMax = 2000;
+        } else {
+            level = 3;
+            expMax = 100000;
+        }
+
     }
 
     //Setters-----------------------------------------------------------------------------------------------------------
@@ -260,9 +273,9 @@ public class Character {
      * @param cha    The charisma of this Character.
      * @param hpMax  The maximum health of this Character.
      * @param mpMax  The maximum magic points of this Character.
-     * @param expMax The maximum experience points of the Character.
+     * @param exp The maximum experience points of the Character.
      */
-    private void setValues(int str, int dex, int con, int intel, int wis, int cha, int hpMax, int mpMax, int expMax) {
+    private void setValues(int str, int dex, int con, int intel, int wis, int cha, int hpMax, int mpMax, int exp) {
         //Sets all the stats for the character.
         this.str = str;
         this.dex = dex;
@@ -274,7 +287,9 @@ public class Character {
         hpCurr = hpMax; //current hp
         this.mpMax = mpMax;
         mpCurr = mpMax;
-        exp = 0; //initial exp set to 0
+
+        //set exp and level for character.
+        setExp(exp);
 
         //Call setBonus() to set all the bonus values.
         setBonus();
