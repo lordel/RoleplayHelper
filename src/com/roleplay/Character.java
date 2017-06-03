@@ -15,7 +15,6 @@ import java.io.File;
  * charisma, health, magic points, and experience. This class stores both maximum health and current health.
  * Bonuses for each stat which has one is automatically calculated. All the current values stored in this class
  * can be saved to an XML file and a previously saved XML file can be used to read values into this class.
- * TODO: Add character level?
  */
 //We define XML elements to allow saving the data to an XML file
 @XmlRootElement(name = "character") //Defines the name of the root XML element
@@ -205,6 +204,8 @@ public class Character {
         return expMax;
     }
 
+    //Setters-----------------------------------------------------------------------------------------------------------
+
     /**
      * Gets the current experience of this Character.
      *
@@ -235,7 +236,14 @@ public class Character {
 
     }
 
-    //Setters-----------------------------------------------------------------------------------------------------------
+    /**
+     * Gets the current level of the Character
+     *
+     * @return The current level of the Character
+     */
+    public int getLevel() {
+        return level;
+    }
 
     /**
      * Gets one of the bonus values from this Character.
@@ -265,15 +273,15 @@ public class Character {
     /**
      * Sets all the stats for this Character.
      *
-     * @param str    The strength of this Character.
-     * @param dex    The dexterity of this Character.
-     * @param con    The constitution of this Character.
-     * @param intel  The intelligence of this Character.
-     * @param wis    The wisdom of this Character.
-     * @param cha    The charisma of this Character.
-     * @param hpMax  The maximum health of this Character.
-     * @param mpMax  The maximum magic points of this Character.
-     * @param exp The maximum experience points of the Character.
+     * @param str   The strength of this Character.
+     * @param dex   The dexterity of this Character.
+     * @param con   The constitution of this Character.
+     * @param intel The intelligence of this Character.
+     * @param wis   The wisdom of this Character.
+     * @param cha   The charisma of this Character.
+     * @param hpMax The maximum health of this Character.
+     * @param mpMax The maximum magic points of this Character.
+     * @param exp   The maximum experience points of the Character.
      */
     private void setValues(int str, int dex, int con, int intel, int wis, int cha, int hpMax, int mpMax, int exp) {
         //Sets all the stats for the character.
